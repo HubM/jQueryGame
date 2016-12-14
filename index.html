@@ -2,10 +2,10 @@
 <html>
 	<head>
 		<script src="jquery.js"></script>
-		<script src="sorcery.js"></script>
+		<script src="EliotStory.js"></script>
 		<link type="text/css" rel="stylesheet" href="style.css" />
 		<meta lang="fr" xml:lang="fr" content="text/html;charset=UTF-8" http-equiv="Content-Type">
-		<title>Sword & Sorcery</title>
+		<title>Mr.Robot | a jQuery Game</title>
 	</head>
 
 	<body>
@@ -15,87 +15,227 @@
 			</div>
 		</div>
 
-		<div class="section" id="intro">
-			<h1>Epic dungeon of the evil necromancer</h1>
-			<p class="intro-desc">En voila un jeu qu'il est bien.</p>
-			<action name="reset"></action>
-			<button go="wakeUp">Commencer l'aventure !</button>
+		<div class="section" id="intro" action="reset">
+			<h1>Where is Darlene ?</h1>
+			<p class="intro-desc">Un jeu imaginé par Gautier Maire et Hubert Moncenis</p>
+			<button go="start">Commencer l'aventure !</button>
+		</div>
+
+		<div class="section" id="start">
+			<p>Vous incarnez le personnage d'Eliot, personnage principal de la série
+				<a href="https://fr.wikipedia.org/wiki/Mr._Robot_(s%C3%A9rie_t%C3%A9l%C3%A9vis%C3%A9e)"
+				target="_blank">Mr.Robot.
+				</a>
+			Le but de ce jeu est de faire des choix en fonction des situations.
+			</p>
+			<p>Votre personnage dispose d'un niveau de stress, si celui-ci dépasse 90%,
+			vous ne pourrez plus contrôler votre personnage, et la partie sera perdue.
+			</p>
+			<p>Remarquez qu'un nombre de pillules est à votre disposition. Ces pilules contiennent
+				de la morphisme, addiction d'Eliot. Elles vous permettent de faire baisser votre taux
+				de stresse, mais faîtes attention à ne pas abuser !
+			</p>
+			<button go="ReveilBrutal">Commencer l'aventure !</button>
+		</div>
+
+		<div class="section" id="ReveilBrutal" action="start">
+			<p>Vous ouvez les yeux...<br>
+			"Quel jour est-il ? Où suis-je ? Ma tête me fait trop mal, je ne peux pas
+			rester comme çà, je dois agir. Aller Eliot, çà va aller..."
+			</p>
+			<button go="MDPOubli" desc="RBTelephone">Prendre le téléphone d'Eliot</button>
+			<button go="ReveilEtrange" desc="RBSommeil">Se rendormir pour aller mieux</button>
+			<button go="MDPOubli" desc="RBMorphine">Atténuer la douleur avec de la morphine</button>
+		</div>
+
+		<div class="section" id="MDPOubli">
+			<div class="RBTelephone" action="monteeStress20">
+				<p>Eliot allume son téléphone. Il s'aperçoit que Darlene a essayé de l'appeler plus de 10 fois.
+					Un mauvais presentiment le pousse à la rappeler. Elle ne répond pas, Eliot comprend que quelque chose
+					de grave est en train de se produire. Il se précipe sur son ordinateur. Au moment de dévérouiller sa session,
+					il se rend compte qu'il ne se rappelle pas de son mot de passe.
+				</p>
+			</div>
+			<div class="RBMorphine" action="baisseStress10" >
+				<p>Eliot s'approche de sa boîte de pillules, en prend une, et l'avale.<br>
+					"Plus que 4, je dois faire attention, j'en ai besoin...". <br>
+					Il remarque un clignottement inhabituel provenant de son ordinateu, il décide alors de le dévérouiller pour voir ce qu'il se passe.
+					C'est à ce moment qu'Eliot se rend compte qu'il a oublié son mot de passe.
+				</p>
+			</div>
+			<button go="ChercherMDP" desc="MDPOConnexionServer">Chercher le mot de passe</button>
+			<button go="ReveilEtrange" desc="MDPOMorphine">Atténuer la douleur avec de la morphine</button>
 		</div>
 
 
-		<div class="section" id="wakeUp">
-			Vous ouvez les yeux... Tout est noir autour de vous...
-			<action name="start"></action>
-			<button go="cavern">Se relever</button>
+		<div class="section" id="ChercherMDP">
+				<p>Le mal de tête empêche Eliot de trouver le mot de passe. Étant quelqu’un de méfiant, il se dit qu’il a du
+					le crypter. Il recherche dans son appartement des éléments qui lui permettraient de s'en rappeler.
+					Pourquoi ne pas l'aider ?
+					<span>Indice : Le mot de passe est une référence lié à <a href="http://www.films-regarder.org/load/origin2_mr_robot/mr_robot_saison_1_episode_1/321-1-0-4894" target="_blank">l'épisode 1</a></span>
+				</p>
+				<form>
+					<label for="FindMDP">Mot de passe :</label>
+					<input type="text" name="FindMPD" value="...">
+					<input type="submit" name="" value="Envoyer">
+				</form>
+		</div>
+
+		<div class="section" id="ReveilEtrange">
+			<div class="RBSommeil" action="monteeStress20">
+				<p>Eliot, très faible, parvient à se rendomir.	Il est réveillé quelques heures plus tard par des coups violents contre sa porte d'entrée. Inquiet,
+					il hurle à l'agresseur de partir et de le laisser tranquille. Soudain, les bruits cessent et le silence s'installe.
+					Eliot se jette sur la porte et l'ouvre : Personne. Il remarque au sol une photo. L'image représente une photo de famille,
+					il remarque que le visage de sa soeur est recouvert de sang. Il doit agir vite...
+				</p>
+			</div>
+			<div class="MDPOMorphine">
+				<p>La dose de Morphine est trop forte. Eliot, très faible, s'endort et ne contrôle plus rien.
+					Il est réveillé quelques heures plus tard par des coups violents contre sa porte d'entrée. Inquiet,
+					il hurle à l'agresseur de partir et de le laisser tranquille. Soudain, les bruits cessent et le silence s'installe.
+					Eliot se jette sur la porte et l'ouvre : Personne. Il remarque au sol une photo. L'image représente une photo de famille,
+					il remarque que le visage de sa soeur est recouvert de sang. Il doit agir vite...
+				</p>
+			</div>
+				<button go="DarkArmyInfiltration" desc="REConnexionServer">Se connecter au serveur FSociety pour avoir des informations</button>
+				<button go="4x4Surveillance" desc="REQuitterAppartement">Quitter l'appartement et chercher Darlene</button>
+		</div>
+
+		<div class="section" id="DarkArmyInfiltration">
+			<div class="REConnexionServer">
+				<p>En ce connectant au serveur FSociety, Eliot se rend compte qu'il a été hacké par la DarkArmy..
+					"Comment la DarkArmy a-t-elle pu intégrer notre serveur ? Qu'ont-ils pu voir ? Y a-t-il un lien avec la
+					disparition de Darlene ?"
+					Eliot remarque qu'un message est en attente...
+				</p>
+			</div>
+				<button go="MessageDA">Lire le message</button>
+				<button go="4x4Surveillance">Quitter l'appartement et chercher Darlene</button>
+		</div>
+
+		<div class="section" id="MessageDA">
+				<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu. Vous avez devant vous un puzzle,
+				recomposez l'image pour pouvoir accèder au contenu du message.
+				</p>
+
+				<!-- Mettre le puzzle ici -->
+				<div class="MDAPuzzle"></div>
+
+				<button go="SaveDarlene">Suivre l'adresse</button>
+				<button go="4x4Surveillance">Ne pas suivre l'adresse</button>
+		</div>
+
+		<div class="section" id="4x4Surveillance">
+				<p>En arrivant sur le pas de sa porte, il remarque qu’un 4x4 noir est garé devant chez lui. Il a un mauvais presentiment.
+					Il doit partir, et vite. Il doit définir sa destination, où va-t-il chercher Darlene ?
+					Il arrête le premier taxi qui passe.
+				</p>
+
+				<button go="FSociety">Aller au hangar FSociety</button>
+				<button go="AppartDarlene">Aller à l'appart de Darlene</button>
+		</div>
+
+		<div class="section" id="FSociety">
+				<p>Eliot se rend à l’entrepôt où il se réunit avec les membres de FSociety.
+					Une fois sur place, il n’y a personne. Que faire ?
+				</p>
+				<button go="PapierAdresse">Chercher dans le lieu</button>
+				<button go="ConnexionPCFSociety">Se connecter à un des PC fixe</button>
+		</div>
+
+		<div class="section" id="ConnexionPCFSociety">
+				<p>En essayant de se connecter à leur réseau, il remarque que l’ordinateur a lui aussi été piraté,
+					et qu’il n’est pas possible de l’utiliser.
+				</p>
+				<button go="PapierAdresse">Chercher dans le lieu</button>
+		</div>
+
+		<div class="section" id="PapierAdresse">
+				<p>Eliot découvre une lettre cachée à l’intérieur de la machine à pop-corn.
+					Il l’ouvre et découvre une adresse. A-t-elle un lien avec la disparition de Darlene ?
+				</p>
+				<button go="SaveDarlene">Se fier à l'adresse</button>
+				<button go="GameOver">Ne pas se fier et continuer à chercher</button>
+		</div>
+
+		<div class="section" id="AppartDarlene">
+				<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu. Vous avez devant vous un puzzle,
+				recomposez l'image pour pouvoir accèder au contenu du message.
+				</p>
+				<button go="RepondreMessagePortableDarlene">Ouvrir le message</button>
+				<button go="GameOver">Ignorer le message et chercher des indices</button>
+		</div>
+
+		<div class="section" id="RepondreMessagePortableDarlene">
+				<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu. Vous avez devant vous un puzzle,
+				recomposez l'image pour pouvoir accèder au contenu du message.
+				</p>
+
+				<!-- Mettre le puzzle ici -->
+				<div class="RMPDPuzzle"></div>
+
+				<button go="SaveDarlene">Suivre l'adresse</button>
+				<button go="GameOver">Ignorer l'adresse et continuer à chercher</button>
+		</div>
+
+		<div class="section" id="SaveDarlene">
+			<p>Eliot arrive à l'adresse, c'est un hangar. En entrant à l'intérieur,
+				il découvre une table avec un pc. Suspendu au-dessus de la table, un écran diffuse une vidéo où on voit
+				sa soeur ligotée. Un compteur se déclenche, il a peu de temps pour la sauver.
+			</p>
+
+			<button go="SuivreEnigme">Participer à l'épreuve</button>
+			<button go="ContournerEnigme">Contourner l'épreuve</button>
+
+
+		</div>
+
+		<div class="section" id="SuivreEnigme">
+			<p>L'écran de l'ordinateur écrit :
+				"Remettez dans l'ordre cette fonction, et vous pourrez sauver Darlene..."
+			</p>
+
+			<!-- Mettre le plugin sortable ici -->
+			<div class="SDSEnigme"></div>
+
+			<button go="FinalSave">Sauver Darlene</button>
 		</div>
 
 
-		<div class="section" id="cavern">
-			Vous êtes dans une caverne sombre. La seule issue semble être
-			une porte à quelques mètres de là.
-			<button go="doorLocked">Sortir</button>
-			<button go="wait">Attendre</button>
-			<button go="examine">Examiner le sol</button>
+		<div class="section" id="ContournerEnigme">
+			<p>En contournant l'enigme de DarkArmy, vous avez déclenché une seconde enigme. Celle-ci est plus complexe et
+				votre temps est moindre. Bonne chance !
+			</p>
+
+			<!-- Mettre le plugin sortable ici -->
+			<div class="SDCEnigme"></div>
+
+			<button go="FinalSave">Sauver Darlene</button>
+			<button go="GameOver">Admettre sa défaite</button>
+		</div>
+
+		<div class="section" id="FinalSave">
+			<p>La porte s'ouvre, et Eliot voit Darlene. Il se jette sur elle et défait ses liens.
+				Bravo ! Vous avez réussi ce jeu, vous avez su gérer votre stress et faire les bons choix.
+			</p>
+
+			<p>Nous vous remercions pour votre participation et espérons que vous avez appréciez ce jeu !</p>
+
+			<button go="intro">Recommencer le jeu</button>
 		</div>
 
 
-		<div class="section" id="examine">
-			Rien de plus que des petits cailloux et de la poussière...
+		<div class="section" id="GameOver">
+			<p>Vous vous êtes fait piéger ! Vos choix n'étaient pas les bons, et Darlene n'a pas survécue.
+			Le choc était trop lourd pour Eliot, qui a basculé dans une folie totale...
+			</p>
+			<p>Merci pour votre participation, envie de redonner une chance à Eliot ?</p>
+			<button go="intro">Recommencer l'histoire</button>
 
-			<button go="doorLocked">Sortir</button>
-			<button go="wait">Attendre</button>
 		</div>
 
 
-		<div class="section" id="wait">
-			Vous attendez quelques minutes, mais rien ne se passe...
-			<button go="wait">Continuer à attendre</button>
-			<button go="hitWall">Se taper la tête contre le mur</button>
-			<button go="doorLocked">Sortir</button>
-			<button go="examine">Examiner le sol</button>
-		</div>
 
-
-		<div class="section" id="hitWall">
-			<p>Aie ! Vous perdez 1 point de vie...</p>
-			<p>Quelque chose tombe du plafond : une clé était cachée dans une
-			faille.</p>
-
-			<action name="hit"></action>
-
-			<button go="exit">Utiliser la clé et ouvrir la porte</button>
-		</div>
-
-
-		<div class="section" id="doorLocked">
-			Malheureusement, une porte en bois bloque le passage. Elle a l'air vraiment solide&nbsp;:
-			peu probable que vous puissiez la défoncer.
-			<button go="hitDoor">Donner un grand coup d'épaule</button>
-			<button go="cavern">Retourner sur vos pas</button>
-		</div>
-
-
-		<div class="section" id="hitDoor">
-			BLAM ! La porte n'a pas bougé d'un poil. Par contre, votre épaule, elle, s'est enfoncée de quelques centimètres.
-			Vous perdez 1 point de vie.
-
-			<action name="hit"></action>
-
-			<button go="hitDoor">Ré-essayer !</button>
-			<button go="cavern">Retourner sur vos pas</button>
-		</div>
-
-
-		<div class="section" id="exit">
-			Vous voyez la lumière du jour... Vous avez réussi à vous échapper !
-			<button go="intro">Fin</button>
-		</div>
-
-
-		<div class="section" id="death">
-			Vous êtes mort(e) ! C'est balot.
-			<button go="intro">Fin</button>
-		</div>
 
 	</body>
 

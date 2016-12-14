@@ -24,21 +24,33 @@ $( function() {
 
 			//aller à la div suivante
 			var nextSection = $(this).attr('go');
-			if(lifeStatut <= 1){
-				gotoSection("intro");
-			} else {
-				gotoSection(nextSection);
-			}
+			gotoSection(nextSection);
+
+			// var descValue = $(this).attr('desc');
+			// alert(descValue);
+
 
 		});
 	});
 
+	/*Afficher la div ayant l'identifiant correspondant à l'attribut go du
+	bouton, et vérifier si cette div a un attribut action. Si oui, alors
+	afficher la fonction associée dans le tableau actionsName*/
 	function gotoSection(key) {
 			$('div#'+key).fadeIn(1000).each(function(){
-				var action = $(this).children('action');
-				$(action).each(function(){
-					actionsName[$(this).attr('name')]();
-				});
+
+				// var DivParagraphs = $(this).children('p');
+				// DivParagraphs.each(function(){
+				// 	var hasDescValue = $(this).attr('desc');
+				// 	if(hasDescValue == show){
+				// 		$(hasDescValue).siblings('p').hide();
+				// 	}
+				// });
+
+				var action = $(this).attr('action');
+				if(action){
+					actionsName[action]();
+				}
 			});
 	}
 
@@ -46,16 +58,8 @@ $( function() {
 		lifeStatut=3;
 	}
 
-	// function setLife(v) {
-	// 	//...
-	// }
-
 	function loseOneLife() {
 		$('#status > div > span').html(lifeStatut-=1);
-		// if(lifeStatut <= 0){
-		// 	$('')
-		// 	gotoSection("intro");
-		// }
 	}
 
 	function startGame() {
@@ -70,13 +74,7 @@ $( function() {
 			getLife();
 			$('#status').show();
 			$('#status > div > span').html(lifeStatut);
-			// currentDiv.hide();
-			// alert('resetFunction');
-			// $('#status').show();
-			// $('#status > div > span').html(lifeStatut);
-			// $(this).fadeOut();
-			// currentDiv.hide();
-			// $('div#intro').show();
+
 	}
 
 	function hit(){
