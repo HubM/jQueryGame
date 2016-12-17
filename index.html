@@ -9,9 +9,12 @@
 	</head>
 
 	<body>
-		<div id="status">
-			<div class="life">
-				Life <br><span class="value">--</span>
+		<div id="EliotInfos">
+			<div class="StressLevel">
+				niveau de stress : <span class="StressValue">100</span>%
+			</div>
+			<div class="MorphinePilules">
+				pilules restantes : <span class="PilulesValue">5</span>
 			</div>
 		</div>
 
@@ -43,20 +46,20 @@
 			"Quel jour est-il ? Où suis-je ? Ma tête me fait trop mal, je ne peux pas
 			rester comme çà, je dois agir. Aller Eliot, çà va aller..."
 			</p>
-			<button go="MDPOubli" desc="RBTelephone">Prendre le téléphone d'Eliot</button>
+			<button go="MDPOubli" desc="RBTelephone" impact="add20S">Prendre le téléphone d'Eliot</button>
 			<button go="ReveilEtrange" desc="RBSommeil">Se rendormir pour aller mieux</button>
-			<button go="MDPOubli" desc="RBMorphine">Atténuer la douleur avec de la morphine</button>
+			<button go="MDPOubli" desc="RBMorphine" impact="loose10S">Atténuer la douleur avec de la morphine</button>
 		</div>
 
 		<div class="section" id="MDPOubli">
-			<div class="RBTelephone" action="monteeStress20">
+			<div class="RBTelephone">
 				<p>Eliot allume son téléphone. Il s'aperçoit que Darlene a essayé de l'appeler plus de 10 fois.
 					Un mauvais presentiment le pousse à la rappeler. Elle ne répond pas, Eliot comprend que quelque chose
 					de grave est en train de se produire. Il se précipe sur son ordinateur. Au moment de dévérouiller sa session,
 					il se rend compte qu'il ne se rappelle pas de son mot de passe.
 				</p>
 			</div>
-			<div class="RBMorphine" action="baisseStress10" >
+			<div class="RBMorphine">
 				<p>Eliot s'approche de sa boîte de pillules, en prend une, et l'avale.<br>
 					"Plus que 4, je dois faire attention, j'en ai besoin...". <br>
 					Il remarque un clignottement inhabituel provenant de son ordinateu, il décide alors de le dévérouiller pour voir ce qu'il se passe.
@@ -64,9 +67,8 @@
 				</p>
 			</div>
 			<button go="ChercherMDP" desc="MDPOConnexionServer">Chercher le mot de passe</button>
-			<button go="ReveilEtrange" desc="MDPOMorphine">Atténuer la douleur avec de la morphine</button>
+			<button go="ReveilEtrange" desc="MDPOMorphine" impact="loose10S">Atténuer la douleur avec de la morphine</button>
 		</div>
-
 
 		<div class="section" id="ChercherMDP">
 				<p>Le mal de tête empêche Eliot de trouver le mot de passe. Étant quelqu’un de méfiant, il se dit qu’il a du
@@ -76,13 +78,15 @@
 				</p>
 				<form>
 					<label for="FindMDP">Mot de passe :</label>
-					<input type="text" name="FindMPD" value="...">
+					<input type="text" name="FindMPD" value="" id="findMDPInput">
 					<input type="submit" name="" value="Envoyer">
 				</form>
+				<button go="SaveDarlene">Suivre l'adresse</button>
+				<button go="4x4Surveillance">Ne pas si fier à l'adresse et quitter l'appartement</button>
 		</div>
 
 		<div class="section" id="ReveilEtrange">
-			<div class="RBSommeil" action="monteeStress20">
+			<div class="RBSommeil">
 				<p>Eliot, très faible, parvient à se rendomir.	Il est réveillé quelques heures plus tard par des coups violents contre sa porte d'entrée. Inquiet,
 					il hurle à l'agresseur de partir et de le laisser tranquille. Soudain, les bruits cessent et le silence s'installe.
 					Eliot se jette sur la porte et l'ouvre : Personne. Il remarque au sol une photo. L'image représente une photo de famille,
@@ -97,7 +101,7 @@
 					il remarque que le visage de sa soeur est recouvert de sang. Il doit agir vite...
 				</p>
 			</div>
-				<button go="DarkArmyInfiltration" desc="REConnexionServer">Se connecter au serveur FSociety pour avoir des informations</button>
+				<button go="DarkArmyInfiltration" desc="REConnexionServer" impact="add20S">Se connecter au serveur FSociety pour avoir des informations</button>
 				<button go="4x4Surveillance" desc="REQuitterAppartement">Quitter l'appartement et chercher Darlene</button>
 		</div>
 
@@ -109,8 +113,8 @@
 					Eliot remarque qu'un message est en attente...
 				</p>
 			</div>
-				<button go="MessageDA">Lire le message</button>
-				<button go="4x4Surveillance">Quitter l'appartement et chercher Darlene</button>
+				<button go="MessageDA" impact="add10S">Lire le message</button>
+				<button go="4x4Surveillance" impact="add30S">Quitter l'appartement et chercher Darlene</button>
 		</div>
 
 		<div class="section" id="MessageDA">
@@ -201,7 +205,6 @@
 			<button go="FinalSave">Sauver Darlene</button>
 		</div>
 
-
 		<div class="section" id="ContournerEnigme">
 			<p>En contournant l'enigme de DarkArmy, vous avez déclenché une seconde enigme. Celle-ci est plus complexe et
 				votre temps est moindre. Bonne chance !
@@ -224,10 +227,12 @@
 			<button go="intro">Recommencer le jeu</button>
 		</div>
 
-
 		<div class="section" id="GameOver">
-			<p>Vous vous êtes fait piéger ! Vos choix n'étaient pas les bons, et Darlene n'a pas survécue.
+			<p class="normal-death">Vous vous êtes fait piéger ! Vos choix n'étaient pas les bons, et Darlene n'a pas survécue.
 			Le choc était trop lourd pour Eliot, qui a basculé dans une folie totale...
+			</p>
+			<p class="stress-death">Le niveau de stress d'Eliot est trop haut. Sa vision se trouve, il s'écroule au sol.
+				Mr.Robot apparaît dans son champ de vision. Il est déjà trop tard...
 			</p>
 			<p>Merci pour votre participation, envie de redonner une chance à Eliot ?</p>
 			<button go="intro">Recommencer l'histoire</button>
