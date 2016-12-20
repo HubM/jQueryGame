@@ -17,6 +17,7 @@ $( function() {
 	var StressLevelValue = 0;
 
 
+
 	/*******************************************************
 							  ***************************
 			  							Initialisation
@@ -25,14 +26,22 @@ $( function() {
 
 	//Cacher les infos d'Eliot
 	$('#EliotInfos').hide();
+	// // $('#ContournerEnigme > button').hide();
+	// // $('#MessageDA button').hide();
+	// // $('#ChercherMDP > button').hide();
 
 	//Tableaux qui associe le nom d'une action avec
 	//une méthode
 	var actionsName = {
 		"start" : startGame,
 		"findMDP" : findMDP,
+		"reset": resetGame,
+		"enigmeSortableEasy": enigmeSortableEasy,
+		"enigmeSortableHard": enigmeSortableEasy,
+		"puzzleDA": puzzleDA,
 	}
 
+	//Tableau
 	var impactsName = {
 		"loose10S" : loose10S,
 		"add10S" : add10S,
@@ -66,13 +75,11 @@ $( function() {
 				impactsName[hasImpact]();
 			}
 
-			//Spécifie des actions lorsque l'on arrive directement sur des div spécifiques.
-			if(nextSection == "ReveilEtrange"){
-				add20S();
-			}
-
-			if(nextSection == "ChercherMDP"){
-				findMDP();
+			//vérifie si il y a	un attribut action à la div parent.
+			//Si oui, alors on va exécuter l'action associée
+			var action = $(this).parent('div').attr('action');
+			if(action){
+				actionsName[action]();
 			}
 
 			//L'attribut desc permet d'associer l'affichage du bon texte
@@ -80,7 +87,7 @@ $( function() {
 			// d'une div pouvant apparaître par différents chemins
 			var desc = $(this).attr('desc');
 			if(desc != undefined){
-				$('div.'+desc).siblings('div').hide();
+				$('div.'+desc).show().siblings('div').hide();
 			}
 
 			//Delimitation du niveau de stress maximal pour mener à bien le jeu
@@ -107,6 +114,12 @@ $( function() {
 		$('#EliotInfos').show();
 		$(StressLevel).html(StressLevelValue);
 		$(MorphinePilules).html(MorphinePilulesValue);
+	}
+
+	function resetGame() {
+		$('#EliotInfos').hide();
+		StressLevelValue = 0;
+		MorphinePilulesValue = 5;
 	}
 
 function endGame(){
@@ -145,10 +158,9 @@ function endGame(){
 	//Elle va également limiter le nombre d'essai à 3. Si dans ces 3 essais le MDP est
 	//trouvé, alors les boutons d'actions s'affichent, sinon le joueur perd
 	function findMDP(){
-		$('button').hide();
+		$('#ChercherMDP > button').hide();
 		var nbEssais = 3;
-
-		$('input[type="submit"]').click(function(e){
+		$('#sendMDP').click(function(e){
 			var MDPProposition = $('#findMDPInput').val();
 			nbEssais -= 1;
 			e.preventDefault();
@@ -169,5 +181,103 @@ function endGame(){
 			}
 		});
 	}
+
+	//Cette fonction correspond au jeu final qui sauve Darlene. Ici c'est la version facile.
+	//Utilisant le plugin sortable de jquery UI, le but est de remettre de l'ordre dans les
+	//différentes propositions pour débloquer le bouton qui sauve Darlene
+	function enigmeSortableEasy(){
+		$('#SuivreEnigme > button').hide();
+		$('.SDSEnigme > ul').sortable( {
+			update: function(event,ui){
+				var Order = $(this).sortable('toArray').toString();
+				if(Order == "1,2,3,4,5,6,7"){
+				alert('ok');
+					$('button').show();
+				}
+			}
+		});
+	}
+
+	//Cette fonction correspond au jeu final qui sauve Darlene. Ici c'est la version facile.
+	//Utilisant le plugin sortable de jquery UI, le but est de remettre de l'ordre dans les
+	//différentes propositions pour débloquer le bouton qui sauve Darlene
+	function enigmeSortableHard(){
+		decompteHard();
+		$('#ContournerEnigme > button').hide();
+		$('.SDCEnigme > ul').sortable( {
+			update: function(event,ui){
+				var Order = $(this).sortable('toArray').toString();
+				if(Order == "1,2,3,4,5"){
+					$('button').show();
+				}
+			}
+		});
+	}
+
+	function decompteHard(){
+		var time = 15;
+
+		timer = setInterval(function(){
+			if(time > 0){
+				time--;
+				$('.decompteHardValue').html(time);
+			}
+			else {
+				clearInterval(timer);
+				$('div').hide();
+				$('#GameOver').fadeIn();
+				$('button').show();
+			}
+		},1000);
+	}
+
+	function puzzleDA(){
+		$('#MessageDA > button, #MessageDA > h2').hide();
+		// $('#MessageDA > h2')
+
+		// define your own settings
+			 var mySettings = {
+				   rows:3,
+					 cols: 3,
+					 hole: 5,
+					 shuffle: true,
+					 numbers: false,
+					 control: {
+							 toggleNumbers: false,
+							 counter: false,
+							 timer: false
+					 },
+					 animation: {
+							 shuffleRounds: 1,
+							 slidingSpeed: 100,
+							 shuffleSpeed: 200
+					 },
+
+					 success: {
+							fadeOriginal: false,    // cross-fade original image [true|false]
+							callback: function(){
+								alert('it works');
+								$('#MessageDA > button, #MessageDA > h2').fadeIn();
+							},    // callback a user-defined function [function]
+							callbackTimeout: 300    // time in ms after which the callback is called
+				},
+			 };
+
+			 $('.imgPuzzleMessageDA').jqPuzzle(mySettings);
+		 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });

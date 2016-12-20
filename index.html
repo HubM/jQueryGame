@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<script src="jquery.js"></script>
+		<script src="jquery-ui.min.js"></script>
+		<script src="jquery.jqpuzzle.min.js"></script>
 		<script src="EliotStory.js"></script>
 		<link type="text/css" rel="stylesheet" href="style.css" />
 		<meta lang="fr" xml:lang="fr" content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -70,7 +72,7 @@
 			<button go="ReveilEtrange" desc="MDPOMorphine" impact="loose10S">Atténuer la douleur avec de la morphine</button>
 		</div>
 
-		<div class="section" id="ChercherMDP">
+		<div class="section" id="ChercherMDP" action="findMDP">
 				<p>Le mal de tête empêche Eliot de trouver le mot de passe. Étant quelqu’un de méfiant, il se dit qu’il a du
 					le crypter. Il recherche dans son appartement des éléments qui lui permettraient de s'en rappeler.
 					Pourquoi ne pas l'aider ?
@@ -79,10 +81,10 @@
 				<form>
 					<label for="FindMDP">Mot de passe :</label>
 					<input type="text" name="FindMPD" value="" id="findMDPInput">
-					<input type="submit" name="" value="Envoyer">
+					<input type="submit" name="" value="Envoyer" id="sendMDP">
 				</form>
-				<button go="SaveDarlene">Suivre l'adresse</button>
-				<button go="4x4Surveillance">Ne pas si fier à l'adresse et quitter l'appartement</button>
+				<button go="DarkArmyInfiltration">Suivre l'adresse</button>
+
 		</div>
 
 		<div class="section" id="ReveilEtrange">
@@ -117,13 +119,15 @@
 				<button go="4x4Surveillance" impact="add30S">Quitter l'appartement et chercher Darlene</button>
 		</div>
 
-		<div class="section" id="MessageDA">
+		<div class="section" id="MessageDA" action="puzzleDA">
 				<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu. Vous avez devant vous un puzzle,
 				recomposez l'image pour pouvoir accèder au contenu du message.
 				</p>
 
 				<!-- Mettre le puzzle ici -->
-				<div class="MDAPuzzle"></div>
+				<img src="imgPuzzleMessageDA.jpg" class="imgPuzzleMessageDA" alt="Première énigme avec un puzzle. Pour lire le message de la Dark Army">
+				<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
+
 
 				<button go="SaveDarlene">Suivre l'adresse</button>
 				<button go="4x4Surveillance">Ne pas suivre l'adresse</button>
@@ -194,27 +198,45 @@
 
 		</div>
 
-		<div class="section" id="SuivreEnigme">
+		<div class="section" id="SuivreEnigme" action="enigmeSortableEasy">
 			<p>L'écran de l'ordinateur écrit :
 				"Remettez dans l'ordre cette fonction, et vous pourrez sauver Darlene..."
 			</p>
 
 			<!-- Mettre le plugin sortable ici -->
-			<div class="SDSEnigme"></div>
+			<div class="SDSEnigme">
+				<ul>
+					<li id="1">function saveDarlene(){</li>
+					<li id="4"> console.log(message[i]);</li>
+					<li id="7">saveDarlene();</li>
+					<li id="3">	for(var i = 0; i < 8; i++){</li>
+					<li id="5"> }</li>
+					<li id="2">	message = ['J','O','I','N','_','U','S'];</li>
+					<li id="6">}</li>
+				</ul>
+			</div>
 
 			<button go="FinalSave">Sauver Darlene</button>
 		</div>
 
-		<div class="section" id="ContournerEnigme">
+		<div class="section" id="ContournerEnigme" action="enigmeSortableHard">
 			<p>En contournant l'enigme de DarkArmy, vous avez déclenché une seconde enigme. Celle-ci est plus complexe et
 				votre temps est moindre. Bonne chance !
 			</p>
 
 			<!-- Mettre le plugin sortable ici -->
-			<div class="SDCEnigme"></div>
+			<div class="SDCEnigme">
+				<ul>
+					<li id="1">TEST1</li>
+					<li id="5">TEST5</li>
+					<li id="3">TEST3</li>
+					<li id="2">TEST2</li>
+					<li id="4">TEST4</li>
 
+				</ul>
+				<p>Temps restant : <span class="decompteHardValue">XX</span>s</p>
+			</div>
 			<button go="FinalSave">Sauver Darlene</button>
-			<button go="GameOver">Admettre sa défaite</button>
 		</div>
 
 		<div class="section" id="FinalSave">
