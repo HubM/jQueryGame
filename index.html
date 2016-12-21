@@ -20,10 +20,10 @@
 			</div>
 		</div>
 
-		<div class="section" id="intro" action="reset">
+		<div class="section" id="intro">
 			<h1>Where is Darlene ?</h1>
 			<p class="intro-desc">Un jeu imaginé par Gautier Maire et Hubert Moncenis</p>
-			<button go="start">Commencer l'aventure !</button>
+			<button go="start">Voir</button>
 		</div>
 
 		<div class="section" id="start">
@@ -48,8 +48,8 @@
 			"Quel jour est-il ? Où suis-je ? Ma tête me fait trop mal, je ne peux pas
 			rester comme çà, je dois agir. Aller Eliot, çà va aller..."
 			</p>
-			<button go="MDPOubli" desc="RBTelephone" impact="add20S">Prendre le téléphone d'Eliot</button>
-			<button go="ReveilEtrange" desc="RBSommeil">Se rendormir pour aller mieux</button>
+			<button go="MDPOubli" desc="RBTelephone" impact="add30S">Prendre le téléphone d'Eliot</button>
+			<button go="ReveilEtrange" desc="RBSommeil" impact="add20S">Se rendormir pour aller mieux</button>
 			<button go="MDPOubli" desc="RBMorphine" impact="loose10S">Atténuer la douleur avec de la morphine</button>
 		</div>
 
@@ -68,7 +68,7 @@
 					C'est à ce moment qu'Eliot se rend compte qu'il a oublié son mot de passe.
 				</p>
 			</div>
-			<button go="ChercherMDP" desc="MDPOConnexionServer">Chercher le mot de passe</button>
+			<button go="ChercherMDP" desc="MDPOConnexionServer" impact="add10S">Chercher le mot de passe</button>
 			<button go="ReveilEtrange" desc="MDPOMorphine" impact="loose10S">Atténuer la douleur avec de la morphine</button>
 		</div>
 
@@ -104,7 +104,7 @@
 				</p>
 			</div>
 				<button go="DarkArmyInfiltration" desc="REConnexionServer" impact="add20S">Se connecter au serveur FSociety pour avoir des informations</button>
-				<button go="4x4Surveillance" desc="REQuitterAppartement">Quitter l'appartement et chercher Darlene</button>
+				<button go="4x4Surveillance" desc="REQuitterAppartement" impact="add20S">Quitter l'appartement et chercher Darlene</button>
 		</div>
 
 		<div class="section" id="DarkArmyInfiltration">
@@ -115,8 +115,8 @@
 					Eliot remarque qu'un message est en attente...
 				</p>
 			</div>
-				<button go="MessageDA" impact="add10S">Lire le message</button>
-				<button go="4x4Surveillance" impact="add30S">Quitter l'appartement et chercher Darlene</button>
+				<button go="MessageDA" impact="add20S">Lire le message</button>
+				<button go="4x4Surveillance" impact="add20S">Quitter l'appartement et chercher Darlene</button>
 		</div>
 
 		<div class="section" id="MessageDA" action="puzzleDA">
@@ -130,7 +130,7 @@
 
 
 				<button go="SaveDarlene">Suivre l'adresse</button>
-				<button go="4x4Surveillance">Ne pas suivre l'adresse</button>
+				<button go="4x4Surveillance" impact="add20S">Ne pas suivre l'adresse</button>
 		</div>
 
 		<div class="section" id="4x4Surveillance">
@@ -148,7 +148,7 @@
 					Une fois sur place, il n’y a personne. Que faire ?
 				</p>
 				<button go="PapierAdresse">Chercher dans le lieu</button>
-				<button go="ConnexionPCFSociety">Se connecter à un des PC fixe</button>
+				<button go="ConnexionPCFSociety" impact="add10S">Se connecter à un des PC fixe</button>
 		</div>
 
 		<div class="section" id="ConnexionPCFSociety">
@@ -162,25 +162,27 @@
 				<p>Eliot découvre une lettre cachée à l’intérieur de la machine à pop-corn.
 					Il l’ouvre et découvre une adresse. A-t-elle un lien avec la disparition de Darlene ?
 				</p>
+				<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
 				<button go="SaveDarlene">Se fier à l'adresse</button>
 				<button go="GameOver">Ne pas se fier et continuer à chercher</button>
 		</div>
 
-		<div class="section" id="AppartDarlene">
-				<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu. Vous avez devant vous un puzzle,
-				recomposez l'image pour pouvoir accèder au contenu du message.
+		<div class="section" id="AppartDarlene" impact="add20S">
+				<p>En arrivant à l'appartement de Darlene, Eliot remarque que celui-ci a été visité. Il cherche des indices quand soudain, un portable sonne.
+					Il s'agit du portable de Darlene, un message est en attente...
 				</p>
 				<button go="RepondreMessagePortableDarlene">Ouvrir le message</button>
 				<button go="GameOver">Ignorer le message et chercher des indices</button>
 		</div>
 
-		<div class="section" id="RepondreMessagePortableDarlene">
+		<div class="section" id="RepondreMessagePortableDarlene" action="puzzleAppartDarlene">
 				<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu. Vous avez devant vous un puzzle,
 				recomposez l'image pour pouvoir accèder au contenu du message.
 				</p>
 
 				<!-- Mettre le puzzle ici -->
-				<div class="RMPDPuzzle"></div>
+				<img src="imgPuzzlePortableDarlene.png" alt="Seconde énigme avec puzzle. Pour lire le message de la Dark Army" class="imgPuzzlePortableDarlene">
+				<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
 
 				<button go="SaveDarlene">Suivre l'adresse</button>
 				<button go="GameOver">Ignorer l'adresse et continuer à chercher</button>
@@ -234,7 +236,7 @@
 					<li id="4">TEST4</li>
 
 				</ul>
-				<p>Temps restant : <span class="decompteHardValue">XX</span>s</p>
+				<p>Temps restant : <span class="decompteHardValue"></span></p>
 			</div>
 			<button go="FinalSave">Sauver Darlene</button>
 		</div>

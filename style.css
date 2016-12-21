@@ -100,11 +100,16 @@ div{
   width: 70%;
 }
 
-#MessageDA a{
+#MessageDA a, #RepondreMessagePortableDarlene a{
   display: none !important;
 }
 
 .jqp-controls{display: none !important;}
+
+.imgPuzzlePortableDarlene{
+  width:50%;
+  height: auto;
+}
 
 /*******************************************************************************
 ********************************************************************************

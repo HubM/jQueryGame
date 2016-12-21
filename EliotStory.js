@@ -26,19 +26,28 @@ $( function() {
 
 	//Cacher les infos d'Eliot
 	$('#EliotInfos').hide();
-	// // $('#ContournerEnigme > button').hide();
-	// // $('#MessageDA button').hide();
-	// // $('#ChercherMDP > button').hide();
+
+	$('.MorphinePilules').click(function(e){
+		if(MorphinePilulesValue > 0){
+			loose10S();
+		} else {
+			e.preventDefault();
+			MorphinePilules = 0;
+		}
+	});
+
+
+
 
 	//Tableaux qui associe le nom d'une action avec
 	//une méthode
 	var actionsName = {
 		"start" : startGame,
 		"findMDP" : findMDP,
-		"reset": resetGame,
 		"enigmeSortableEasy": enigmeSortableEasy,
-		"enigmeSortableHard": enigmeSortableEasy,
+		"enigmeSortableHard": enigmeSortableHard,
 		"puzzleDA": puzzleDA,
+		"puzzleAppartDarlene" :puzzleAppartDarlene,
 	}
 
 	//Tableau
@@ -67,6 +76,10 @@ $( function() {
 			var nextSection = $(this).attr('go');
 			gotoSection(nextSection);
 
+			if(nextSection == "intro"){
+				window.location.href = window.location.href;
+			}
+
 			//Si le bouton a un attr impact, alors on
 			//affecte associe sa valeur à une fonction associée dans le tableau
 			//impactsName
@@ -94,6 +107,13 @@ $( function() {
 			if(StressLevelValue >= 90){
 				endGame();
 			}
+
+			//Delimitation du niveau de stress maximal pour mener à bien le jeu
+			if(nextSection == "GameOver"){
+				$('.stress-death').hide();
+			}
+
+
 		});
 	});
 
@@ -116,21 +136,15 @@ $( function() {
 		$(MorphinePilules).html(MorphinePilulesValue);
 	}
 
-	function resetGame() {
-		$('#EliotInfos').hide();
-		StressLevelValue = 0;
-		MorphinePilulesValue = 5;
+	/*Fonction lorsque le jouer a perdu d'une mort liée au stress.*/
+	function endGame(){
+		$('div').hide();
+		var gameOver = $('#GameOver');
+		gameOver.children('.normal-death').hide();
+		gameOver.fadeIn(500);
 	}
 
-function endGame(){
-	$('div').hide();
-	var gameOver = $('#GameOver');
-	gameOver.children('.normal-death').hide();
-	gameOver.fadeIn(500);
-
-}
-
-
+	/*Fonction lors d'une prise de de pillule de Morphine*/
 	function loose10S(){
 		StressLevelValue -= 10;
 		StressLevel.html(StressLevelValue);
@@ -150,7 +164,7 @@ function endGame(){
 	}
 
 	function add30S(){
-		StressLevelValue += 20;
+		StressLevelValue += 30;
 		StressLevel.html(StressLevelValue);
 	}
 
@@ -168,8 +182,10 @@ function endGame(){
 			if(nbEssais > 0){
 				//Si mdp = leavemehere
 				if(MDPProposition == "leavemehere"){
-					alert('mot de passe trovué');
+					MorphinePilulesValue += 2;
+					MorphinePilules.html(MorphinePilulesValue);
 					$('button').fadeIn();
+
 				}else{
 					alert('il vous reste ' + nbEssais + ' chance(s)');
 				}
@@ -214,6 +230,9 @@ function endGame(){
 		});
 	}
 
+	//La fonction enigmeSortableHard utilise un compteur pour résoudre l'enigme.
+	//Si la solution est trouvée dans le temps imparti, alors le joueur accède au niveau suivante
+	//Sinon il perd la partie
 	function decompteHard(){
 		var time = 15;
 
@@ -231,41 +250,74 @@ function endGame(){
 		},1000);
 	}
 
+	//La fonction puzzleDA correspond à l'enigme Puzzle pour lire le message de
+	//la Dark Army. Le but est de recomposer le puzzle pour pouvoir voir le contenu du message
 	function puzzleDA(){
 		$('#MessageDA > button, #MessageDA > h2').hide();
-		// $('#MessageDA > h2')
-
-		// define your own settings
-			 var mySettings = {
-				   rows:3,
-					 cols: 3,
-					 hole: 5,
-					 shuffle: true,
-					 numbers: false,
-					 control: {
-							 toggleNumbers: false,
-							 counter: false,
-							 timer: false
-					 },
-					 animation: {
-							 shuffleRounds: 1,
-							 slidingSpeed: 100,
-							 shuffleSpeed: 200
-					 },
-
-					 success: {
-							fadeOriginal: false,    // cross-fade original image [true|false]
-							callback: function(){
-								alert('it works');
-								$('#MessageDA > button, #MessageDA > h2').fadeIn();
-							},    // callback a user-defined function [function]
-							callbackTimeout: 300    // time in ms after which the callback is called
+		//Les paramètres du puzzleDA
+		var mySettingsPuzzle1 = {
+				rows:3,
+				cols: 3,
+				hole: 5,
+				shuffle: true,
+				numbers: false,
+				control: {
+						toggleNumbers: false,
+						counter: false,
+						timer: false
 				},
-			 };
+				animation: {
+						shuffleRounds: 1,
+						slidingSpeed: 100,
+						shuffleSpeed: 200
+				},
 
-			 $('.imgPuzzleMessageDA').jqPuzzle(mySettings);
-		 }
+				success: {
+					 fadeOriginal: false,    // cross-fade original image [true|false]
+					 callback: function(){
+						 alert('it works');
+						 $('#MessageDA > button, #MessageDA > h2').fadeIn();
+					 },    // callback a user-defined function [function]
+					 callbackTimeout: 300    // time in ms after which the callback is called
+		 },
+		};
+    $('.imgPuzzleMessageDA').jqPuzzle(mySettingsPuzzle1);
+	}
 
+
+	//La fonction puzzleDA correspond à l'enigme Puzzle pour lire le message de
+	//la Dark Army. Le but est de recomposer le puzzle pour pouvoir voir le contenu du message
+	function puzzleAppartDarlene(){
+		$('#RepondreMessagePortableDarlene > button, #RepondreMessagePortableDarlene > h2').hide();
+		//Les paramètres du puzzleDA
+		var mySettingsPuzzle2 = {
+				rows:4,
+				cols: 3,
+				hole: 5,
+				shuffle: true,
+				numbers: false,
+				control: {
+						toggleNumbers: false,
+						counter: false,
+						timer: false
+				},
+				animation: {
+						shuffleRounds: 1,
+						slidingSpeed: 100,
+						shuffleSpeed: 200
+				},
+
+				success: {
+					 fadeOriginal: false,    // cross-fade original image [true|false]
+					 callback: function(){
+						 alert('it works');
+						 $('#RepondreMessagePortableDarlene > button, #RepondreMessagePortableDarlene > h2').fadeIn();
+					 },    // callback a user-defined function [function]
+					 callbackTimeout: 300    // time in ms after which the callback is called
+		 },
+		};
+    $('.imgPuzzlePortableDarlene').jqPuzzle(mySettingsPuzzle2);
+	}
 
 
 
