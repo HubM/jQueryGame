@@ -17,7 +17,6 @@ $( function() {
 	var StressLevelValue = 0;
 
 
-
 	/*******************************************************
 							  ***************************
 			  							Initialisation
@@ -26,6 +25,7 @@ $( function() {
 
 	//Cacher les infos d'Eliot
 	$('#EliotInfos').hide();
+	$('.ModifyInfos > span').hide();
 
 	$('.MorphinePilules').click(function(e){
 		if(MorphinePilulesValue > 0){
@@ -152,6 +152,7 @@ $( function() {
 
 	/*Fonction lors d'une prise de de pillule de Morphine*/
 	function loose10S(){
+		$('.ModifyInfos > span:first-of-type').fadeIn().fadeOut(1000);
 		StressLevelValue -= 10;
 		StressLevel.html(StressLevelValue);
 		MorphinePilulesValue -= 1;
@@ -159,17 +160,20 @@ $( function() {
 	}
 
 	function add10S(){
+		$('.ModifyInfos > span:nth-of-type(2)').fadeIn().fadeOut(1000);
 		StressLevelValue += 10;
 		StressLevel.html(StressLevelValue);
 	}
 
 
 	function add20S(){
+		$('.ModifyInfos > span:nth-of-type(3)').fadeIn().fadeOut(1000);
 		StressLevelValue += 20;
 		StressLevel.html(StressLevelValue);
 	}
 
 	function add30S(){
+		$('.ModifyInfos > span:last-of-type').fadeIn().fadeOut(1000);
 		StressLevelValue += 30;
 		StressLevel.html(StressLevelValue);
 	}
@@ -210,7 +214,21 @@ $( function() {
 		$('#SuivreEnigme > button').hide();
 		$('.SDSEnigme > ul').sortable( {
 			update: function(event,ui){
-				var Order = $(this).sortable('toArray').toString();
+				var Order = $(this).sortable('toArray');
+				console.log(Order);
+				for(var i = 1; i<Order.length; i++){
+					var goodOrdre = $('#'+i).attr('id');
+					if(goodOrdre == Order[i]){
+						alert('all good for the number '+ i);
+					}
+					// alert(Order[i]);
+
+					// if($('#'+i) == Order[i]){
+					// 	alert(i + 'work');
+					// }
+				}
+				Order.toString();
+
 				if(Order == "1,2,3,4,5,6,7"){
 					MorphinePilulesValue += 1;
 					MorphinePilules.html(MorphinePilulesValue);
@@ -230,7 +248,8 @@ $( function() {
 		$('.SDCEnigme > ul').sortable( {
 			update: function(event,ui){
 				var Order = $(this).sortable('toArray').toString();
-				console.log(Order);
+				MorphinePilulesValue += 1;
+				MorphinePilules.html(MorphinePilulesValue);
 				if(Order == "1,2,3,4,5"){
 					$('button').show();
 				}
@@ -283,8 +302,8 @@ $( function() {
 				success: {
 					 fadeOriginal: false,    // cross-fade original image [true|false]
 					 callback: function(){
-						 alert('it works');
-						 $('#MessageDA > button, #MessageDA > h2').fadeIn();
+						 $('.imgPuzzleMessageDA').fadeOut();
+						 $('#MessageDA > button, #MessageDA > h2').fadeIn(500);
 					 },    // callback a user-defined function [function]
 					 callbackTimeout: 300    // time in ms after which the callback is called
 		 },
@@ -318,8 +337,8 @@ $( function() {
 				success: {
 					 fadeOriginal: false,    // cross-fade original image [true|false]
 					 callback: function(){
-						 alert('it works');
-						 $('#RepondreMessagePortableDarlene > button, #RepondreMessagePortableDarlene > h2').fadeIn();
+						 $('.imgPuzzleMessageDA').fadeOut();
+						 $('#RepondreMessagePortableDarlene > button, #RepondreMessagePortableDarlene > h2').fadeIn(500);
 					 },    // callback a user-defined function [function]
 					 callbackTimeout: 300    // time in ms after which the callback is called
 		 },
