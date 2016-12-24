@@ -47,12 +47,7 @@ h1{
   text-align: center;
 }
 
-.intro-desc{
-	font-family: 'envy_code_rregular';
-	text-align: center;
-  color: white;
-}
-button{
+button, input[type="submit"]{
   padding: 15px 30px;
   background: none;
   border: none;
@@ -61,11 +56,21 @@ button{
   display: block;
   margin: 50px auto 0 auto;
   outline: 0;
-    font-family: 'envy_code_rregular';
-  /*cursor: url()*/
+  font-family: 'envy_code_rregular';
 }
 
-.section
+
+/*******************************************************************************
+********************************************************************************
+									  						SPECIFIC CSS
+********************************************************************************
+*******************************************************************************/
+
+.intro-desc{
+	font-family: 'envy_code_rregular';
+	text-align: center;
+  color: white;
+}
 
 #EliotInfos{
   width: auto;
@@ -73,6 +78,7 @@ button{
   right: 25px;
   top: 15px;
   font-size: 1em;
+  color: white;
 }
 
 #EliotInfos > div{
@@ -82,23 +88,28 @@ button{
 .life > span{
   font-size: 2rem;
 }
-/*******************************************************************************
-********************************************************************************
-									  						MAIN CSS
-********************************************************************************
-*******************************************************************************/
-
-
-
 
 .section:not(#intro){
 	display: none;
   width: 50%;
-  /*display: block;*/
   margin: 100px auto;
   color: white;
 }
 
+#ChercherMDP > form > label{
+  width: 100%;
+  display: block;
+  margin-bottom: 30px;
+}
+
+#findMDPInput{
+  background: transparent;
+  border: 1px solid #CC0008;
+  color: white;
+  font-size: 4rem;
+  outline: 0;
+  font-family: 'envy_code_rregular';
+}
 
 #MessageDA a, #RepondreMessagePortableDarlene a{
   display: none !important;
@@ -110,9 +121,3 @@ button{
   width:50%;
   height: auto;
 }
-
-/*******************************************************************************
-********************************************************************************
-									  						SNAPPUZZLE
-********************************************************************************
-*******************************************************************************/

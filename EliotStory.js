@@ -12,7 +12,7 @@ $( function() {
 	//Les infos d'Eliot
 	var EliotInfos = $("#EliotInfos");
 	var MorphinePilules = $('.MorphinePilules > span');
-	var MorphinePilulesValue = 5;
+	var MorphinePilulesValue = 3;
 	var StressLevel = $('.StressLevel > span');
 	var StressLevelValue = 0;
 
@@ -131,6 +131,12 @@ $( function() {
 
 	/*Initialiser les valeurs par défault du niveau de stress et de pilules*/
 	function startGame() {
+		$('#ReveilBrutal').children().not('.infos_begin').hide();
+		$('.infos_begin > button').click(function(e){
+			e.preventDefault();
+			$(this).parent().hide();
+			$('#ReveilBrutal').children().not('.infos_begin').fadeIn();
+		});
 		$('#EliotInfos').show();
 		$(StressLevel).html(StressLevelValue);
 		$(MorphinePilules).html(MorphinePilulesValue);
@@ -182,14 +188,13 @@ $( function() {
 			if(nbEssais > 0){
 				//Si mdp = leavemehere
 				if(MDPProposition == "leavemehere"){
-					MorphinePilulesValue += 2;
+					MorphinePilulesValue += 1;
 					MorphinePilules.html(MorphinePilulesValue);
+					$('#ChercherMDP > form').fadeOut();
 					$('button').fadeIn();
-
 				}else{
 					alert('il vous reste ' + nbEssais + ' chance(s)');
 				}
-				// Si tous les essais ont été passés
 		 	}else{
 		 		$('div').hide();
 				$('#GameOver').fadeIn();
@@ -207,8 +212,10 @@ $( function() {
 			update: function(event,ui){
 				var Order = $(this).sortable('toArray').toString();
 				if(Order == "1,2,3,4,5,6,7"){
-				alert('ok');
+					MorphinePilulesValue += 1;
+					MorphinePilules.html(MorphinePilulesValue);
 					$('button').show();
+					$(this).fadeOut();
 				}
 			}
 		});
@@ -223,6 +230,7 @@ $( function() {
 		$('.SDCEnigme > ul').sortable( {
 			update: function(event,ui){
 				var Order = $(this).sortable('toArray').toString();
+				console.log(Order);
 				if(Order == "1,2,3,4,5"){
 					$('button').show();
 				}
