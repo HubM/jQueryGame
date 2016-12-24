@@ -26,256 +26,255 @@
 			</div>
 		</div>
 
-		<div class="section" id="intro">
-			<h1>Where is Darlene</h1>
-			<p class="intro-desc">Un jeu imaginé par Gautier Maire et Hubert Moncenis</p>
-			<button go="start">$_Voir</button>
-		</div>
-
-		<div class="section" id="start">
-			<p>Vous incarnez le personnage d'Eliot, personnage principal de la série
-				<a href="http://www.allocine.fr/series/ficheserie_gen_cserie=17966.html"
-				target="_blank">Mr.Robot.</a>
-			Le but de ce jeu est de faire des choix en fonction des situations.
-			</p>
-			<p>Votre personnage dispose d'un niveau de stress, si celui-ci dépasse 90%,
-			vous ne pourrez plus contrôler votre personnage, et la partie sera perdue.
-			</p>
-			<p>Remarquez qu'un nombre de pillules est à votre disposition. Ces pilules contiennent
-				de la morphisme, addiction d'Eliot. Elles vous permettent de faire baisser votre taux
-				de stress, mais faîtes attention à ne pas abuser !
-			</p>
-			<button go="ReveilBrutal">$_Commencer</button>
-		</div>
-
-		<div class="section" id="ReveilBrutal" action="start">
-			<p>Vous ouvez les yeux...<br>
-			"Quel jour est-il ? Où suis-je ? Ma tête me fait trop mal, je ne peux pas
-			rester comme çà, je dois agir. Aller Eliot, çà va aller..."
-			</p>
-
-			<div class="infos_begin">
-				<h2>Penser à cliquer sur les pilules afin de faire baisser votre taux de stress ! Le nombre étant limité, managez votre stess de manière intelligente, bon jeu !</h2>
-				<button>$_JaiCompris</button>
-			</div>
-			<button go="MDPOubli" desc="RBTelephone" impact="add30S">$_PrendreEliotTéléphone</button>
-			<button go="ReveilEtrange" desc="RBSommeil" impact="add20S">$_Redormir</button>
-			<button go="MDPOubli" desc="RBMorphine" impact="loose10S">$_PrendreMorphine</button>
-		</div>
-
-		<div class="section" id="MDPOubli">
-			<div class="RBTelephone">
-				<p>Eliot allume son téléphone. Il s'aperçoit que Darlene a essayé de l'appeler plus de 10 fois.
-					Un mauvais presentiment le pousse à la rappeler. Elle ne répond pas, Eliot comprend que quelque chose
-					de grave est en train de se produire. Il se précipe sur son ordinateur. Au moment de dévérouiller sa session,
-					il se rend compte qu'il ne se rappelle pas de son mot de passe.
-				</p>
-			</div>
-			<div class="RBMorphine">
-				<p>Eliot s'approche de sa boîte de pillules, en prend une, et l'avale.<br>
-					"Plus que 4, je dois faire attention, j'en ai besoin...". <br>
-					Il remarque un clignottement inhabituel provenant de son ordinateu, il décide alors de le dévérouiller pour voir ce qu'il se passe.
-					C'est à ce moment qu'Eliot se rend compte qu'il a oublié son mot de passe.
-				</p>
-			</div>
-			<button go="ChercherMDP" desc="MDPOConnexionServer" impact="add10S">$_ChercherMotDePasse</button>
-			<button go="ReveilEtrange" desc="MDPOMorphine" impact="loose10S">$_PrendreMorphine</button>
-		</div>
-
-		<div class="section" id="ChercherMDP" action="findMDP">
-				<p>Le mal de tête empêche Eliot de trouver le mot de passe. Étant quelqu’un de méfiant, il se dit qu’il a du
-					le crypter. Il recherche dans son appartement des éléments qui lui permettraient de s'en rappeler.
-					Pourquoi ne pas l'aider ?
-					<span>Indice : Le mot de passe est une référence lié à <a href="http://www.films-regarder.org/load/origin2_mr_robot/mr_robot_saison_1_episode_1/321-1-0-4894" target="_blank">l'épisode 1</a></span>
-				</p>
-				<form>
-					<label for="FindMDP">Mot de passe :</label>
-					<input type="text" name="FindMPD" value="" id="findMDPInput">
-					<input type="submit" name="" value="$_Envoyer" id="sendMDP">
-				</form>
-				<button go="DarkArmyInfiltration">$_Suivre l'adresse</button>
-
-		</div>
-
-		<div class="section" id="ReveilEtrange">
-			<div class="RBSommeil">
-				<p>Eliot, très faible, parvient à se rendomir.	Il est réveillé quelques heures plus tard par des coups violents contre sa porte d'entrée. Inquiet,
-					il hurle à l'agresseur de partir et de le laisser tranquille. Soudain, les bruits cessent et le silence s'installe.
-					Eliot se jette sur la porte et l'ouvre : Personne. Il remarque au sol une photo. L'image représente une photo de famille,
-					il remarque que le visage de sa soeur est recouvert de sang. Il doit agir vite...
-				</p>
-			</div>
-			<div class="MDPOMorphine">
-				<p>La dose de Morphine est trop forte. Eliot, très faible, s'endort et ne contrôle plus rien.
-					Il est réveillé quelques heures plus tard par des coups violents contre sa porte d'entrée. Inquiet,
-					il hurle à l'agresseur de partir et de le laisser tranquille. Soudain, les bruits cessent et le silence s'installe.
-					Eliot se jette sur la porte et l'ouvre : Personne. Il remarque au sol une photo. L'image représente une photo de famille,
-					il remarque que le visage de sa soeur est recouvert de sang. Il doit agir vite...
-				</p>
-			</div>
-				<button go="DarkArmyInfiltration" desc="REConnexionServer" impact="add20S">$_ConnexionServeurFSociety</button>
-				<button go="4x4Surveillance" desc="REQuitterAppartement" impact="add20S">$_QuitterAppartement</button>
-		</div>
-
-		<div class="section" id="DarkArmyInfiltration">
-			<div class="REConnexionServer">
-				<p>En ce connectant au serveur FSociety, Eliot se rend compte qu'il a été hacké par la DarkArmy..
-					"Comment la DarkArmy a-t-elle pu intégrer notre serveur ? Qu'ont-ils pu voir ? Y a-t-il un lien avec la
-					disparition de Darlene ?"
-					Eliot remarque qu'un message est en attente...
-				</p>
-			</div>
-				<button go="MessageDA" impact="add20S">$_Lire</button>
-				<button go="4x4Surveillance" impact="add20S">$_QuitterAppartement</button>
-		</div>
-
-		<div class="section" id="MessageDA" action="puzzleDA">
-				<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu. Vous avez devant vous un puzzle,
-				recomposez l'image pour pouvoir accèder au contenu du message.
-				</p>
-
-				<!-- Mettre le puzzle ici -->
-				<img src="imgPuzzleMessageDA.jpg" class="imgPuzzleMessageDA" alt="Première énigme avec un puzzle. Pour lire le message de la Dark Army">
-				<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
-
-
-				<button go="SaveDarlene">$_SuivreAdresse</button>
-				<button go="4x4Surveillance" impact="add20S">$_QuitterAppartement</button>
-		</div>
-
-		<div class="section" id="4x4Surveillance">
-				<p>En arrivant sur le pas de sa porte, il remarque qu’un 4x4 noir est garé devant chez lui. Il a un mauvais presentiment.
-					Il doit partir, et vite. Il doit définir sa destination, où va-t-il chercher Darlene ?
-					Il arrête le premier taxi qui passe.
-				</p>
-
-				<button go="FSociety">$_AllerHangarFSociety</button>
-				<button go="AppartDarlene">$_AllerChezDarlene</button>
-		</div>
-
-		<div class="section" id="FSociety">
-				<p>Eliot se rend à l’entrepôt où il se réunit avec les membres de FSociety.
-					Une fois sur place, il n’y a personne. Que faire ?
-				</p>
-				<button go="PapierAdresse">$_Chercher</button>
-				<button go="ConnexionPCFSociety" impact="add10S">$_SeConnecterPC</button>
-		</div>
-
-		<div class="section" id="ConnexionPCFSociety">
-				<p>En essayant de se connecter à leur réseau, il remarque que l’ordinateur a lui aussi été piraté,
-					et qu’il n’est pas possible de l’utiliser.
-				</p>
-				<button go="PapierAdresse">$_Chercher</button>
-		</div>
-
-		<div class="section" id="PapierAdresse">
-				<p>Eliot découvre une lettre cachée à l’intérieur de la machine à pop-corn.
-					Il l’ouvre et découvre une adresse. A-t-elle un lien avec la disparition de Darlene ?
-				</p>
-				<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
-				<button go="SaveDarlene">$_SuivreAdresse</button>
-				<button go="GameOver">$_IgnorerAdresse</button>
-		</div>
-
-		<div class="section" id="AppartDarlene" impact="add20S">
-				<p>En arrivant à l'appartement de Darlene, Eliot remarque que celui-ci a été visité. Il cherche des indices quand soudain, un portable sonne.
-					Il s'agit du portable de Darlene, un message est en attente...
-				</p>
-				<button go="RepondreMessagePortableDarlene">$_OuvrirMessage</button>
-				<button go="GameOver">$_IgnorerMessage</button>
-		</div>
-
-		<div class="section" id="RepondreMessagePortableDarlene" action="puzzleAppartDarlene">
-				<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu. Vous avez devant vous un puzzle,
-				recomposez l'image pour pouvoir accèder au contenu du message.
-				</p>
-
-				<!-- Mettre le puzzle ici -->
-				<img src="imgPuzzlePortableDarlene.png" alt="Seconde énigme avec puzzle. Pour lire le message de la Dark Army" class="imgPuzzlePortableDarlene">
-				<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
-
-				<button go="SaveDarlene">$_SuivreAdresse</button>
-				<button go="GameOver">$_IgnorerAdresse</button>
-		</div>
-
-		<div class="section" id="SaveDarlene">
-			<p>Eliot arrive à l'adresse, c'est un hangar. En entrant à l'intérieur,
-				il découvre une table avec un pc. Suspendu au-dessus de la table, un écran diffuse une vidéo où on voit
-				sa soeur ligotée. Un compteur se déclenche, il a peu de temps pour la sauver.
-			</p>
-
-			<button go="SuivreEnigme">$_ParticiperEpreuve</button>
-			<button go="ContournerEnigme">$_ContournerEpreuve</button>
-
-
-		</div>
-
-		<div class="section" id="SuivreEnigme" action="enigmeSortableEasy">
-			<p>L'écran de l'ordinateur écrit :
-				"Remettez dans l'ordre cette fonction, et vous pourrez sauver Darlene..."
-			</p>
-
-			<!-- Mettre le plugin sortable ici -->
-			<div class="SDSEnigme">
-				<ul>
-					<li id="1">function saveDarlene(){</li>
-					<li id="4"> console.log(message[i]);</li>
-					<li id="7">saveDarlene();</li>
-					<li id="3">	for(var i = 0; i < 8; i++){</li>
-					<li id="5"> }</li>
-					<li id="2">	message = ['J','O','I','N','_','U','S'];</li>
-					<li id="6">}</li>
-				</ul>
+		<div class="filter">
+			<div class="section" id="intro">
+				<h1>Where is Darlene</h1>
+				<p class="intro-desc">Un jeu imaginé par Gautier Maire et Hubert Moncenis</p>
+				<button go="start">$_Voir</button>
 			</div>
 
-			<button go="FinalSave">$_SauverDarlene</button>
-		</div>
-
-		<div class="section" id="ContournerEnigme" action="enigmeSortableHard">
-			<p>En contournant l'enigme de DarkArmy, vous avez déclenché une seconde enigme. Celle-ci est plus complexe et
-				votre temps est moindre. Bonne chance !
-			</p>
-
-			<!-- Mettre le plugin sortable ici -->
-			<div class="SDCEnigme">
-				<ul>
-					<li id="1">TEST1</li>
-					<li id="5">TEST5</li>
-					<li id="3">TEST3</li>
-					<li id="2">TEST2</li>
-					<li id="4">TEST4</li>
-
-				</ul>
-				<p>Temps restant : <span class="decompteHardValue"></span></p>
+			<div class="section" id="start">
+				<p>Vous incarnez le personnage d'Eliot, personnage principal de la série
+					<a href="http://www.allocine.fr/series/ficheserie_gen_cserie=17966.html"
+					target="_blank">Mr.Robot.</a>
+				Le but de ce jeu est de faire des choix en fonction des situations.
+				</p>
+				<p>Votre personnage dispose d'un niveau de stress, si celui-ci dépasse 90%,
+				vous ne pourrez plus contrôler votre personnage, et la partie sera perdue.
+				</p>
+				<p>Remarquez qu'un nombre de pillules est à votre disposition. Ces pilules contiennent
+					de la morphisme, addiction d'Eliot. Elles vous permettent de faire baisser votre taux
+					de stress, mais faîtes attention à ne pas abuser !
+				</p>
+				<button go="ReveilBrutal">$_Commencer</button>
 			</div>
-			<button go="FinalSave">$_SauverDarlene</button>
+
+			<div class="section" id="ReveilBrutal" action="start">
+				<p>Vous ouvez les yeux...<br>
+				"Quel jour est-il ? Où suis-je ? Ma tête me fait trop mal, je ne peux pas
+				rester comme çà, je dois agir. Aller Eliot, çà va aller..."
+				</p>
+
+				<div class="infos_begin">
+					<h2>Penser à cliquer sur les pilules afin de faire baisser votre taux de stress ! Le nombre étant limité, managez votre stess de manière intelligente, bon jeu !</h2>
+					<button>$_JaiCompris</button>
+				</div>
+				<button go="MDPOubli" desc="RBTelephone" impact="add30S">$_PrendreEliotTéléphone</button>
+				<button go="ReveilEtrange" desc="RBSommeil" impact="add30S">$_Redormir</button>
+				<button go="MDPOubli" desc="RBMorphine" impact="loose10S">$_PrendreMorphine</button>
+			</div>
+
+			<div class="section" id="MDPOubli">
+				<div class="RBTelephone">
+					<p>Eliot allume son téléphone. Il s'aperçoit que Darlene a essayé de l'appeler plus de 10 fois.
+						Un mauvais presentiment le pousse à la rappeler. Elle ne répond pas, Eliot comprend que quelque chose
+						de grave est en train de se produire. Il se précipe sur son ordinateur. Au moment de dévérouiller sa session,
+						il se rend compte qu'il ne se rappelle pas de son mot de passe.
+					</p>
+				</div>
+				<div class="RBMorphine">
+					<p>Eliot s'approche de sa boîte de pillules, en prend une, et l'avale.<br>
+						"Plus que 4, je dois faire attention, j'en ai besoin...". <br>
+						Il remarque un clignottement inhabituel provenant de son ordinateu, il décide alors de le dévérouiller pour voir ce qu'il se passe.
+						C'est à ce moment qu'Eliot se rend compte qu'il a oublié son mot de passe.
+					</p>
+				</div>
+				<button go="ChercherMDP" desc="MDPOConnexionServer" impact="add20S">$_ChercherMotDePasse</button>
+				<button go="ReveilEtrange" desc="MDPOMorphine" impact="loose10S">$_PrendreMorphine</button>
+			</div>
+
+			<div class="section" id="ChercherMDP" action="findMDP">
+					<p>Le mal de tête empêche Eliot de trouver le mot de passe. Étant quelqu’un de méfiant, il se dit qu’il a du
+						le crypter. Il recherche dans son appartement des éléments qui lui permettraient de s'en rappeler.
+						Pourquoi ne pas l'aider ?
+						<span>Indice : Le mot de passe est une référence lié à <a href="http://www.films-regarder.org/load/origin2_mr_robot/mr_robot_saison_1_episode_1/321-1-0-4894" target="_blank">l'épisode 1</a></span>
+					</p>
+					<form>
+						<label for="FindMDP">Mot de passe :</label>
+						<input type="text" name="FindMPD" value="" id="findMDPInput">
+						<input type="submit" name="" value="$_Envoyer" id="sendMDP">
+					</form>
+					<button go="DarkArmyInfiltration">$_Suivre l'adresse</button>
+
+			</div>
+
+			<div class="section" id="ReveilEtrange">
+				<div class="RBSommeil">
+					<p>Eliot, très faible, parvient à se rendomir.	Il est réveillé quelques heures plus tard par des coups violents contre sa porte d'entrée. Inquiet,
+						il hurle à l'agresseur de partir et de le laisser tranquille. Soudain, les bruits cessent et le silence s'installe.
+						Eliot se jette sur la porte et l'ouvre : Personne. Il remarque au sol une photo. L'image représente une photo de famille,
+						il remarque que le visage de sa soeur est recouvert de sang. Il doit agir vite...
+					</p>
+				</div>
+				<div class="MDPOMorphine">
+					<p>La dose de Morphine est trop forte. Eliot, très faible, s'endort et ne contrôle plus rien.
+						Il est réveillé quelques heures plus tard par des coups violents contre sa porte d'entrée. Inquiet,
+						il hurle à l'agresseur de partir et de le laisser tranquille. Soudain, les bruits cessent et le silence s'installe.
+						Eliot se jette sur la porte et l'ouvre : Personne. Il remarque au sol une photo. L'image représente une photo de famille,
+						il remarque que le visage de sa soeur est recouvert de sang. Il doit agir vite...
+					</p>
+				</div>
+					<button go="DarkArmyInfiltration" desc="REConnexionServer" impact="add20S">$_ConnexionServeurFSociety</button>
+					<button go="4x4Surveillance" desc="REQuitterAppartement" impact="add30S">$_QuitterAppartement</button>
+			</div>
+
+			<div class="section" id="DarkArmyInfiltration">
+				<div class="REConnexionServer">
+					<p>En ce connectant au serveur FSociety, Eliot se rend compte qu'il a été hacké par la DarkArmy..
+						"Comment la DarkArmy a-t-elle pu intégrer notre serveur ? Qu'ont-ils pu voir ? Y a-t-il un lien avec la
+						disparition de Darlene ?"
+						Eliot remarque qu'un message est en attente...
+					</p>
+				</div>
+					<button go="MessageDA" impact="add20S">$_Lire</button>
+					<button go="4x4Surveillance" impact="add20S">$_QuitterAppartement</button>
+			</div>
+
+			<div class="section" id="MessageDA" action="puzzleDA">
+					<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu. Vous avez devant vous un puzzle,
+					recomposez l'image pour pouvoir accèder au contenu du message.
+					</p>
+
+					<!-- Mettre le puzzle ici -->
+					<img src="imgPuzzleMessageDA.jpg" class="imgPuzzleMessageDA" alt="Première énigme avec un puzzle. Pour lire le message de la Dark Army">
+					<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
+
+
+					<button go="SaveDarlene" impact="add20S">$_SuivreAdresse</button>
+					<button go="4x4Surveillance" impact="add20S">$_QuitterAppartement</button>
+			</div>
+
+			<div class="section" id="4x4Surveillance">
+					<p>En arrivant sur le pas de sa porte, il remarque qu’un 4x4 noir est garé devant chez lui. Il a un mauvais presentiment.
+						Il doit partir, et vite. Il doit définir sa destination, où va-t-il chercher Darlene ?
+						Il arrête le premier taxi qui passe.
+					</p>
+
+					<button go="FSociety" impact="add10S">$_AllerHangarFSociety</button>
+					<button go="AppartDarlene" impact="add30S">$_AllerChezDarlene</button>
+			</div>
+
+			<div class="section" id="FSociety">
+					<p>Eliot se rend à l’entrepôt où il se réunit avec les membres de FSociety.
+						Une fois sur place, il n’y a personne. Que faire ?
+					</p>
+					<button go="PapierAdresse">$_Chercher</button>
+					<button go="ConnexionPCFSociety" impact="add10S">$_SeConnecterPC</button>
+			</div>
+
+			<div class="section" id="ConnexionPCFSociety">
+					<p>En essayant de se connecter à leur réseau, il remarque que l’ordinateur a lui aussi été piraté,
+						et qu’il n’est pas possible de l’utiliser.
+					</p>
+					<button go="PapierAdresse">$_Chercher</button>
+			</div>
+
+			<div class="section" id="PapierAdresse">
+					<p>Eliot découvre une lettre cachée à l’intérieur de la machine à pop-corn.
+						Il l’ouvre et découvre une adresse. A-t-elle un lien avec la disparition de Darlene ?
+					</p>
+					<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
+					<button go="SaveDarlene">$_SuivreAdresse</button>
+					<button go="GameOver">$_IgnorerAdresse</button>
+			</div>
+
+			<div class="section" id="AppartDarlene" impact="add20S">
+					<p>En arrivant à l'appartement de Darlene, Eliot remarque que celui-ci a été visité. Il cherche des indices quand soudain, un portable sonne.
+						Il s'agit du portable de Darlene, un message est en attente...
+					</p>
+					<button go="RepondreMessagePortableDarlene" impact="add10S">$_OuvrirMessage</button>
+					<button go="GameOver">$_IgnorerMessage</button>
+			</div>
+
+			<div class="section" id="RepondreMessagePortableDarlene" action="puzzleAppartDarlene">
+					<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu. Vous avez devant vous un puzzle,
+					recomposez l'image pour pouvoir accèder au contenu du message.
+					</p>
+
+					<!-- Mettre le puzzle ici -->
+					<img src="imgPuzzlePortableDarlene.png" alt="Seconde énigme avec puzzle. Pour lire le message de la Dark Army" class="imgPuzzlePortableDarlene">
+					<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
+
+					<button go="SaveDarlene" impact="add20S">$_SuivreAdresse</button>
+					<button go="GameOver">$_IgnorerAdresse</button>
+			</div>
+
+			<div class="section" id="SaveDarlene">
+				<p>Eliot arrive à l'adresse, c'est un hangar. En entrant à l'intérieur,
+					il découvre une table avec un pc. Suspendu au-dessus de la table, un écran diffuse une vidéo où on voit
+					sa soeur ligotée. Un compteur se déclenche, il a peu de temps pour la sauver.
+				</p>
+
+				<button go="SuivreEnigme">$_ParticiperEpreuve</button>
+				<button go="ContournerEnigme" impact="add20S">$_ContournerEpreuve</button>
+
+
+			</div>
+
+			<div class="section" id="SuivreEnigme" action="enigmeSortableEasy">
+				<p>L'écran de l'ordinateur écrit :
+					"Remettez dans l'ordre cette fonction, et vous pourrez sauver Darlene..."
+				</p>
+
+				<!-- Mettre le plugin sortable ici -->
+				<div class="SDSEnigme">
+					<ul>
+						<li id="1">function saveDarlene(){</li>
+						<li id="4"> console.log(message[i]);</li>
+						<li id="7">saveDarlene();</li>
+						<li id="3">	for(var i = 0; i < 8; i++){</li>
+						<li id="5"> }</li>
+						<li id="2">	message = ['J','O','I','N','_','U','S'];</li>
+						<li id="6">}</li>
+					</ul>
+				</div>
+
+				<button go="FinalSave">$_SauverDarlene</button>
+			</div>
+
+			<div class="section" id="ContournerEnigme" action="enigmeSortableHard">
+				<p>En contournant l'enigme de DarkArmy, vous avez déclenché une seconde enigme. Celle-ci est plus complexe et
+					votre temps est moindre. Bonne chance !
+				</p>
+
+				<!-- Mettre le plugin sortable ici -->
+				<div class="SDCEnigme">
+					<ul>
+						<li id="1">TEST1</li>
+						<li id="5">TEST5</li>
+						<li id="3">TEST3</li>
+						<li id="2">TEST2</li>
+						<li id="4">TEST4</li>
+
+					</ul>
+					<p>Temps restant : <span class="decompteHardValue"></span></p>
+				</div>
+				<button go="FinalSave">$_SauverDarlene</button>
+			</div>
+
+			<div class="section" id="FinalSave">
+				<p>La porte s'ouvre, et Eliot voit Darlene. Il se jette sur elle et défait ses liens.
+					Bravo ! Vous avez réussi ce jeu, vous avez su gérer votre stress et faire les bons choix.
+				</p>
+
+				<p>Nous vous remercions pour votre participation et espérons que vous avez appréciez ce jeu !</p>
+
+				<button go="intro">$_RecommencerJeu</button>
+			</div>
+
+			<div class="section" id="GameOver">
+				<p class="normal-death">Vous vous êtes fait piéger ! Vos choix n'étaient pas les bons, et Darlene n'a pas survécue.
+				Le choc était trop lourd pour Eliot, qui a basculé dans une folie totale...
+				</p>
+				<p class="stress-death">Le niveau de stress d'Eliot est trop haut. Sa vision se trouve, il s'écroule au sol.
+					Mr.Robot apparaît dans son champ de vision. Il est déjà trop tard...
+				</p>
+				<p>Merci pour votre participation, envie de redonner une chance à Eliot ?</p>
+				<button go="intro">$_RecommencerJeu</button>
+
+			</div>
+
 		</div>
-
-		<div class="section" id="FinalSave">
-			<p>La porte s'ouvre, et Eliot voit Darlene. Il se jette sur elle et défait ses liens.
-				Bravo ! Vous avez réussi ce jeu, vous avez su gérer votre stress et faire les bons choix.
-			</p>
-
-			<p>Nous vous remercions pour votre participation et espérons que vous avez appréciez ce jeu !</p>
-
-			<button go="intro">$_RecommencerJeu</button>
-		</div>
-
-		<div class="section" id="GameOver">
-			<p class="normal-death">Vous vous êtes fait piéger ! Vos choix n'étaient pas les bons, et Darlene n'a pas survécue.
-			Le choc était trop lourd pour Eliot, qui a basculé dans une folie totale...
-			</p>
-			<p class="stress-death">Le niveau de stress d'Eliot est trop haut. Sa vision se trouve, il s'écroule au sol.
-				Mr.Robot apparaît dans son champ de vision. Il est déjà trop tard...
-			</p>
-			<p>Merci pour votre participation, envie de redonner une chance à Eliot ?</p>
-			<button go="intro">$_RecommencerJeu</button>
-
-		</div>
-
-
-
-
 	</body>
 
 </html>

@@ -28,6 +28,8 @@ body{
 	height: 100%;
 	background: black;
   font-family: 'envy_code_rregular';
+  background: url('img/intro.jpg') center no-repeat;
+  background-size: cover;
 }
 
 a{
@@ -40,7 +42,8 @@ h1{
   font-size: 6rem;
   width: 100%;
   display: block;
-  margin: 50px auto;
+  margin: 0 auto;
+  padding: 100px 0;
   letter-spacing: 20px;
   line-height: 120px;
   color: #CC0008;
@@ -58,6 +61,7 @@ button, input[type="submit"]{
   outline: 0;
   font-family: 'envy_code_rregular';
   width: 50%;
+  cursor: pointer;
 }
 
 
@@ -90,10 +94,13 @@ button, input[type="submit"]{
   font-size: 2rem;
 }
 
+
+
 .section:not(#intro){
 	display: none;
   width: 50%;
-  margin: 100px auto;
+  margin: 0 auto;
+  padding-top:100px;
   color: white;
 }
 
@@ -148,4 +155,10 @@ button, input[type="submit"]{
 
 .ModifyInfos > span:not(:first-of-type){
   color:#CC0008;
+}
+
+
+.filter{
+  background: rgba(0,0,0,0.75);
+  height: 100vh;
 }

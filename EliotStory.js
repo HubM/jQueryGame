@@ -37,8 +37,6 @@ $( function() {
 	});
 
 
-
-
 	//Tableaux qui associe le nom d'une action avec
 	//une méthode
 	var actionsName = {
@@ -71,10 +69,19 @@ $( function() {
 		$(this).each(function(){
 			$(this).parent().hide();
 
+			//L'attribut desc permet d'associer l'affichage du bon texte
+			// par rapport au bouton précédemment clické, spécialement dans le cas
+			// d'une div pouvant apparaître par différents chemins
+			var desc = $(this).attr('desc');
+			if(desc != undefined){
+				$('div.'+desc).show().siblings('div').hide();
+			}
+
 			//Grace à l'attribut desc, on va pouvoir associer l'affichage
 			// de la bonne div par rapport au bouton clicker
 			var nextSection = $(this).attr('go');
 			gotoSection(nextSection);
+			changeBackground(nextSection);
 
 			if(nextSection == "intro"){
 				window.location.href = window.location.href;
@@ -93,14 +100,6 @@ $( function() {
 			var action = $(this).parent('div').attr('action');
 			if(action){
 				actionsName[action]();
-			}
-
-			//L'attribut desc permet d'associer l'affichage du bon texte
-			// par rapport au bouton précédemment clické, spécialement dans le cas
-			// d'une div pouvant apparaître par différents chemins
-			var desc = $(this).attr('desc');
-			if(desc != undefined){
-				$('div.'+desc).show().siblings('div').hide();
 			}
 
 			//Delimitation du niveau de stress maximal pour mener à bien le jeu
@@ -214,21 +213,7 @@ $( function() {
 		$('#SuivreEnigme > button').hide();
 		$('.SDSEnigme > ul').sortable( {
 			update: function(event,ui){
-				var Order = $(this).sortable('toArray');
-				console.log(Order);
-				for(var i = 1; i<Order.length; i++){
-					var goodOrdre = $('#'+i).attr('id');
-					if(goodOrdre == Order[i]){
-						alert('all good for the number '+ i);
-					}
-					// alert(Order[i]);
-
-					// if($('#'+i) == Order[i]){
-					// 	alert(i + 'work');
-					// }
-				}
-				Order.toString();
-
+				var Order = $(this).sortable('toArray').toString();
 				if(Order == "1,2,3,4,5,6,7"){
 					MorphinePilulesValue += 1;
 					MorphinePilules.html(MorphinePilulesValue);
@@ -346,17 +331,17 @@ $( function() {
     $('.imgPuzzlePortableDarlene').jqPuzzle(mySettingsPuzzle2);
 	}
 
+	function changeBackground(key){
 
 
 
-
-
-
-
-
-
-
-
-
+		if(key == "start"){ $('body').css('background','url("img/eliotcharacter.jpg") center no-repeat'); }
+		if(key == "ReveilBrutal"){ $('body').css('background','url("img/eliotbed.jpg") center no-repeat / cover'); }
+		if(key == "MDPOubli" && $('.RBTelephone').is(":visible")){ $('body').css('background','url("img/phone.jpg") center no-repeat / cover'); }
+		if(key == "MDPOubli" && $('.RBMorphine').is(":visible")){ $('body').css('background','url("img/drug.jpg") center no-repeat / cover'); }
+		if(key == "ChercherMDP"){ $('body').css('background','url("img/forgetmdp.jpg") center no-repeat / cover'); }
+		if(key == "DarkArmyInfiltration"){ $('body').css('background','url("img/serverhacked.png") center no-repeat / cover'); }
+		if(key == "ReveilEtrange"){ $('body').css('background','url("img/sleep.jpg") center no-repeat / cover'); }
+	}
 
 });
