@@ -342,6 +342,13 @@ $( function() {
 		if(key == "ChercherMDP"){ $('body').css('background','url("img/forgetmdp.jpg") center no-repeat / cover'); }
 		if(key == "DarkArmyInfiltration"){ $('body').css('background','url("img/serverhacked.png") center no-repeat / cover'); }
 		if(key == "ReveilEtrange"){ $('body').css('background','url("img/sleep.jpg") center no-repeat / cover'); }
+		if(key == "ReveilEtrange" && $('.MDPOMorphine').is(":visible")){ $('body').css('background','url("img/drug.jpg") center no-repeat / cover'); }
+		if(key == "4x4Surveillance"){ $('body').css('background','url("img/4x4Surveillance.jpg") center no-repeat / cover'); }
+		if(key == "FSociety"){ $('body').css('background','url("img/FsocietyHangar.png") center no-repeat / cover'); }
+		if(key == "PapierAdresse"){ $('body').css('background','url("img/QrMessage.png") center no-repeat / cover'); }
+		if(key == "ConnexionPCFSociety"){ $('body').css('background','url("img/QrMessage.png") center no-repeat / cover');}
+
+
 	}
 
 });
