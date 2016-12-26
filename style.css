@@ -28,8 +28,9 @@ body{
 	height: 100%;
 	background: black;
   font-family: 'envy_code_rregular';
-  background: url('img/intro.jpg') center no-repeat;
-  background-size: cover;
+  background: url('img/eliotcharacter.jpg') center no-repeat / cover;
+  /*background-size: cover;*/
+  transition: all .5s ease;
 }
 
 a{
@@ -161,4 +162,33 @@ button, input[type="submit"]{
 .filter{
   background: rgba(0,0,0,0.75);
   height: 100vh;
+}
+
+
+/*SORTABLE*/
+#SuivreEnigme ul, #ContournerEnigme ul{
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  width: 50%;
+  display: block;
+  margin: 50px auto 0 auto;
+}
+
+#SuivreEnigme li, #ContournerEnigme li{
+  line-height: 30px;
+  border: 1px solid green;
+  padding-left: 10px;
+  margin-bottom: 12px;
+}
+
+.infos_begin{
+    margin-top: 25%;
+}
+
+.skipPuzzleMessage{
+  display: block;
+  position: absolute;
+  left: -14%;
+  top: 50%;
 }

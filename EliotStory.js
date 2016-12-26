@@ -15,6 +15,7 @@ $( function() {
 	var MorphinePilulesValue = 3;
 	var StressLevel = $('.StressLevel > span');
 	var StressLevelValue = 0;
+	var time = 15;
 
 
 	/*******************************************************
@@ -103,7 +104,8 @@ $( function() {
 			}
 
 			//Delimitation du niveau de stress maximal pour mener à bien le jeu
-			if(StressLevelValue >= 90){
+			if(StressLevelValue > 90){
+				$('.filter').css('opacity','1');
 				endGame();
 			}
 
@@ -128,7 +130,8 @@ $( function() {
 			});
 	}
 
-	/*Initialiser les valeurs par défault du niveau de stress et de pilules*/
+	/*Initialiser les valeurs par défault du niveau de stress et de pilules.
+	et les infos en début de jeu pour comprendre les règles*/
 	function startGame() {
 		$('#ReveilBrutal').children().not('.infos_begin').hide();
 		$('.infos_begin > button').click(function(e){
@@ -141,15 +144,16 @@ $( function() {
 		$(MorphinePilules).html(MorphinePilulesValue);
 	}
 
-	/*Fonction lorsque le jouer a perdu d'une mort liée au stress.*/
+	/*Fonction lorsque le jouer a perdu d'une mort liée à de mauvais choix.*/
 	function endGame(){
-		$('div').hide();
-		var gameOver = $('#GameOver');
-		gameOver.children('.normal-death').hide();
-		gameOver.fadeIn(500);
+		$('div').not('.filter').hide();
+		$('#GameOver').fadeIn(500);
+		$('#GameOver').children('.normal-death').hide();
+		$('body').css('background','url("img/intro.jpg") center no-repeat / cover');
 	}
 
-	/*Fonction lors d'une prise de de pillule de Morphine*/
+	//Cette fonction baisse de 10 le niveau de stress et l'affiche,
+	// et diminue de 1 le nombre de pilules
 	function loose10S(){
 		$('.ModifyInfos > span:first-of-type').fadeIn().fadeOut(1000);
 		StressLevelValue -= 10;
@@ -158,19 +162,21 @@ $( function() {
 		MorphinePilules.html(MorphinePilulesValue);
 	}
 
+	//Cette fonction augmente de 10 le niveau de stress et l'affiche
 	function add10S(){
 		$('.ModifyInfos > span:nth-of-type(2)').fadeIn().fadeOut(1000);
 		StressLevelValue += 10;
 		StressLevel.html(StressLevelValue);
 	}
 
-
+	//Cette fonction augmente de 20 le niveau de stress et l'affiche
 	function add20S(){
 		$('.ModifyInfos > span:nth-of-type(3)').fadeIn().fadeOut(1000);
 		StressLevelValue += 20;
 		StressLevel.html(StressLevelValue);
 	}
 
+	//Cette fonction augmente de 30 le niveau de stress et l'affiche
 	function add30S(){
 		$('.ModifyInfos > span:last-of-type').fadeIn().fadeOut(1000);
 		StressLevelValue += 30;
@@ -190,7 +196,9 @@ $( function() {
 			//Vérifier si il reste encore des essais au joueur
 			if(nbEssais > 0){
 				//Si mdp = leavemehere
-				if(MDPProposition == "leavemehere"){
+				if(MDPProposition == "leavemehere" || MDPProposition == "LeaveMeHere"
+				|| MDPProposition == "leave_me_here" || MDPProposition == "leave-me-here"
+				|| MDPProposition == "leave me here" || MDPProposition == "LEAVEMEHERE"){
 					MorphinePilulesValue += 1;
 					MorphinePilules.html(MorphinePilulesValue);
 					$('#ChercherMDP > form').fadeOut();
@@ -233,21 +241,25 @@ $( function() {
 		$('.SDCEnigme > ul').sortable( {
 			update: function(event,ui){
 				var Order = $(this).sortable('toArray').toString();
-				MorphinePilulesValue += 1;
-				MorphinePilules.html(MorphinePilulesValue);
 				if(Order == "1,2,3,4,5"){
+					$('.SDCEnigme > p').hide();
+					time = 1;
+					clearInterval(timer);
+					$(this).fadeOut();
+					MorphinePilulesValue += 1;
+					MorphinePilules.html(MorphinePilulesValue);
 					$('button').show();
 				}
 			}
 		});
 	}
 
+
+
 	//La fonction enigmeSortableHard utilise un compteur pour résoudre l'enigme.
 	//Si la solution est trouvée dans le temps imparti, alors le joueur accède au niveau suivante
 	//Sinon il perd la partie
 	function decompteHard(){
-		var time = 15;
-
 		timer = setInterval(function(){
 			if(time > 0){
 				time--;
@@ -255,9 +267,10 @@ $( function() {
 			}
 			else {
 				clearInterval(timer);
-				$('div').hide();
-				$('#GameOver').fadeIn();
-				$('button').show();
+				$('div').not('.filter').hide();
+				$('#GameOver').fadeIn(500);
+				$('#GameOver').children('.stress-death').hide();
+				$('body').css('background','url("img/intro.jpg") center no-repeat / cover');
 			}
 		},1000);
 	}
@@ -266,6 +279,9 @@ $( function() {
 	//la Dark Army. Le but est de recomposer le puzzle pour pouvoir voir le contenu du message
 	function puzzleDA(){
 		$('#MessageDA > button, #MessageDA > h2').hide();
+		setTimeout(function(){
+			$('.skipPuzzleMessage').fadeIn();
+		}, 5000);
 		//Les paramètres du puzzleDA
 		var mySettingsPuzzle1 = {
 				rows:3,
@@ -301,6 +317,9 @@ $( function() {
 	//la Dark Army. Le but est de recomposer le puzzle pour pouvoir voir le contenu du message
 	function puzzleAppartDarlene(){
 		$('#RepondreMessagePortableDarlene > button, #RepondreMessagePortableDarlene > h2').hide();
+		setTimeout(function(){
+			$('.skipPuzzleMessage').fadeIn();
+		}, 5000);
 		//Les paramètres du puzzleDA
 		var mySettingsPuzzle2 = {
 				rows:4,
@@ -333,9 +352,7 @@ $( function() {
 
 	function changeBackground(key){
 
-
-
-		if(key == "start"){ $('body').css('background','url("img/eliotcharacter.jpg") center no-repeat'); }
+		if(key == "start"){ $('body').css('background','url("img/eliotcharacter.jpg") center no-repeat') }
 		if(key == "ReveilBrutal"){ $('body').css('background','url("img/eliotbed.jpg") center no-repeat / cover'); }
 		if(key == "MDPOubli" && $('.RBTelephone').is(":visible")){ $('body').css('background','url("img/phone.jpg") center no-repeat / cover'); }
 		if(key == "MDPOubli" && $('.RBMorphine').is(":visible")){ $('body').css('background','url("img/drug.jpg") center no-repeat / cover'); }
@@ -347,7 +364,7 @@ $( function() {
 		if(key == "FSociety"){ $('body').css('background','url("img/FsocietyHangar.png") center no-repeat / cover'); }
 		if(key == "PapierAdresse"){ $('body').css('background','url("img/QrMessage.png") center no-repeat / cover'); }
 		if(key == "ConnexionPCFSociety"){ $('body').css('background','url("img/QrMessage.png") center no-repeat / cover');}
-
+		if(key == "GameOver"){ $('body').css('background','url("img/intro.jpg") center no-repeat / cover');}
 
 	}
 

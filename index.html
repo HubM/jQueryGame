@@ -137,6 +137,7 @@
 
 					<!-- Mettre le puzzle ici -->
 					<img src="imgPuzzleMessageDA.jpg" class="imgPuzzleMessageDA" alt="Première énigme avec un puzzle. Pour lire le message de la Dark Army">
+					<button class="skipPuzzleMessage" go="GameOver">Passer</button>
 					<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
 
 
@@ -149,7 +150,6 @@
 						Il doit partir, et vite. Il doit définir sa destination, où va-t-il chercher Darlene ?
 						Il arrête le premier taxi qui passe.
 					</p>
-
 					<button go="FSociety" impact="add10S">$_AllerHangarFSociety</button>
 					<button go="AppartDarlene" impact="add30S">$_AllerChezDarlene</button>
 			</div>
@@ -193,6 +193,7 @@
 
 					<!-- Mettre le puzzle ici -->
 					<img src="imgPuzzlePortableDarlene.png" alt="Seconde énigme avec puzzle. Pour lire le message de la Dark Army" class="imgPuzzlePortableDarlene">
+					<button class="skipPuzzleMessage" go="GameOver">Passer</button>
 					<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
 
 					<button go="SaveDarlene" impact="add20S">$_SuivreAdresse</button>
@@ -240,11 +241,11 @@
 				<!-- Mettre le plugin sortable ici -->
 				<div class="SDCEnigme">
 					<ul>
-						<li id="1">TEST1</li>
-						<li id="5">TEST5</li>
-						<li id="3">TEST3</li>
-						<li id="2">TEST2</li>
-						<li id="4">TEST4</li>
+						<li id="4">console.log("Le poisson rouge d'Eliot s'appelle : "<br> + result[i]);</li>
+						<li id="5">}</li>
+						<li id="2">var result = ["QWERTY","404ERROR",<br>"42","AZERTY","HELLOWORLD"];</li>
+						<li id="1">var i;</li>
+						<li id="3">for(i = 0; i < result.length; i++) {</li>
 
 					</ul>
 					<p>Temps restant : <span class="decompteHardValue"></span></p>
