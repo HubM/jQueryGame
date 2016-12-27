@@ -1,6 +1,6 @@
 /*******************************************************************************
 ********************************************************************************
-									  						NORMALIZE
+									  						Basics
 ********************************************************************************
 *******************************************************************************/
 
@@ -29,8 +29,8 @@ body{
 	background: black;
   font-family: 'envy_code_rregular';
   background: url('img/eliotcharacter.jpg') center no-repeat / cover;
-  /*background-size: cover;*/
   transition: all .5s ease;
+  color: white;
 }
 
 a{
@@ -65,19 +65,28 @@ button, input[type="submit"]{
   cursor: pointer;
 }
 
+.filter{
+  background: rgba(0,0,0,0.75);
+  height: 100vh;
+}
+
+.infos_begin{
+    margin-top: 25%;
+}
+
 
 /*******************************************************************************
 ********************************************************************************
-									  						SPECIFIC CSS
+									  						Specific css
 ********************************************************************************
 *******************************************************************************/
 
+/*Description page accueil*/
 .intro-desc{
-	font-family: 'envy_code_rregular';
 	text-align: center;
-  color: white;
 }
 
+/*Niveau de santé d'Elliot*/
 #EliotInfos{
   width: auto;
   position: absolute;
@@ -95,49 +104,6 @@ button, input[type="submit"]{
   font-size: 2rem;
 }
 
-
-
-.section:not(#intro){
-	display: none;
-  width: 50%;
-  margin: 0 auto;
-  padding-top:100px;
-  color: white;
-}
-
-#ChercherMDP > form > label{
-  width: 100%;
-  display: block;
-  margin-bottom: 30px;
-}
-
-#findMDPInput, #findFishInput{
-  background: transparent;
-  border: 1px solid #00FF00;
-  color: white;
-  font-size: 4rem;
-  outline: 0;
-  font-family: 'envy_code_rregular';
-}
-
-#MessageDA a, #RepondreMessagePortableDarlene a{
-  display: none !important;
-}
-
-.jqPuzzle{
-  position: absolute;
-  left: 20%;
-}
-
-.jqp-controls{display: none !important;}
-
-.imgPuzzlePortableDarlene{
-  width:50%;
-  height: auto;
-}
-
-
-/*ELIOT INFOS*/
 .ModifyInfos{
   width: auto;
 }
@@ -158,14 +124,59 @@ button, input[type="submit"]{
   color:#CC0008;
 }
 
-
-.filter{
-  background: rgba(0,0,0,0.75);
-  height: 100vh;
+/*Ensemble des .section sauf intro*/
+.section:not(#intro){
+	display: none;
+  width: 50%;
+  margin: 0 auto;
+  padding-top:100px;
+  color: white;
 }
 
 
-/*SORTABLE*/
+/*Formulaire d'envoi de réponse, pour MDP et Poisson*/
+#ChercherMDP > form > label{
+  width: 100%;
+  display: block;
+  margin-bottom: 30px;
+}
+
+#findMDPInput, #findFishInput{
+  background: transparent;
+  border: 1px solid #00FF00;
+  color: white;
+  font-size: 4rem;
+  outline: 0;
+  font-family: 'envy_code_rregular';
+}
+
+/*Cacher le logo de la librairie jqpuzzle + styles pour puzzle*/
+#MessageDA a, #RepondreMessagePortableDarlene a{
+  display: none !important;
+}
+
+.jqPuzzle{
+  position: absolute;
+  left: 20%;
+}
+
+.jqp-controls{display: none !important;}
+
+.imgPuzzlePortableDarlene{
+  width:50%;
+  height: auto;
+}
+
+
+.skipPuzzleMessage{
+  display: block;
+  position: absolute;
+  left: 6%;
+  top: 50%;
+  width: 110px;
+}
+
+/*Style pour les épreuves où l'utilisateur doit replacer dans le bon ordre les fonctions*/
 #SuivreEnigme ul, #ContournerEnigme ul{
   padding: 0;
   text-decoration: none;
@@ -180,16 +191,4 @@ button, input[type="submit"]{
   border: 1px solid green;
   padding-left: 10px;
   margin-bottom: 12px;
-}
-
-.infos_begin{
-    margin-top: 25%;
-}
-
-.skipPuzzleMessage{
-  display: block;
-  position: absolute;
-  left: 6%;
-  top: 50%;
-  width: 110px;
 }
