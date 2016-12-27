@@ -111,7 +111,7 @@ button, input[type="submit"]{
   margin-bottom: 30px;
 }
 
-#findMDPInput{
+#findMDPInput, #findFishInput{
   background: transparent;
   border: 1px solid #00FF00;
   color: white;
@@ -189,6 +189,7 @@ button, input[type="submit"]{
 .skipPuzzleMessage{
   display: block;
   position: absolute;
-  left: -14%;
+  left: 6%;
   top: 50%;
+  width: 110px;
 }

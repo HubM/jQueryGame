@@ -15,7 +15,8 @@ $( function() {
 	var MorphinePilulesValue = 3;
 	var StressLevel = $('.StressLevel > span');
 	var StressLevelValue = 0;
-	var time = 15;
+	var nbEssais = 3;
+
 
 
 	/*******************************************************
@@ -47,6 +48,7 @@ $( function() {
 		"enigmeSortableHard": enigmeSortableHard,
 		"puzzleDA": puzzleDA,
 		"puzzleAppartDarlene" :puzzleAppartDarlene,
+		"findFish": findFish,
 	}
 
 	//Tableau
@@ -149,7 +151,7 @@ $( function() {
 		$('div').not('.filter').hide();
 		$('#GameOver').fadeIn(500);
 		$('#GameOver').children('.normal-death').hide();
-		$('body').css('background','url("img/intro.jpg") center no-repeat / cover');
+		if($('.stress-death').is(":visible")){ $('body').css('background','url("img/elliotMad.png") center no-repeat / cover');}
 	}
 
 	//Cette fonction baisse de 10 le niveau de stress et l'affiche,
@@ -188,7 +190,6 @@ $( function() {
 	//trouvé, alors les boutons d'actions s'affichent, sinon le joueur perd
 	function findMDP(){
 		$('#ChercherMDP > button').hide();
-		var nbEssais = 3;
 		$('#sendMDP').click(function(e){
 			var MDPProposition = $('#findMDPInput').val();
 			nbEssais -= 1;
@@ -199,7 +200,7 @@ $( function() {
 				if(MDPProposition == "leavemehere" || MDPProposition == "LeaveMeHere"
 				|| MDPProposition == "leave_me_here" || MDPProposition == "leave-me-here"
 				|| MDPProposition == "leave me here" || MDPProposition == "LEAVEMEHERE"){
-					MorphinePilulesValue += 1;
+					MorphinePilulesValue += 2;
 					MorphinePilules.html(MorphinePilulesValue);
 					$('#ChercherMDP > form').fadeOut();
 					$('button').fadeIn();
@@ -207,7 +208,7 @@ $( function() {
 					alert('il vous reste ' + nbEssais + ' chance(s)');
 				}
 		 	}else{
-		 		$('div').hide();
+		 		$('div').not('.filter').hide();
 				$('#GameOver').fadeIn();
 				$('button').show();
 			}
@@ -236,7 +237,27 @@ $( function() {
 	//Utilisant le plugin sortable de jquery UI, le but est de remettre de l'ordre dans les
 	//différentes propositions pour débloquer le bouton qui sauve Darlene
 	function enigmeSortableHard(){
-		decompteHard();
+
+		//La fonction enigmeSortableHard utilise un compteur pour résoudre l'enigme.
+		//Si la solution est trouvée dans le temps imparti, alors le joueur accède au niveau suivante
+		//Sinon il perd la partie
+	  var time = 15;
+		var timer;
+
+		timer = setInterval(function(){
+			if(time > 0){
+				time--;
+				$('.decompteHardValue').html(time);
+			}
+			else {
+				clearInterval(timer);
+				time = undefined;
+				$('div').not('.filter').hide();
+				$('#GameOver').fadeIn(500);
+				$('#GameOver').children('.stress-death').hide();
+				$('body').css('background','url("img/intro.jpg") center no-repeat / cover');
+			}
+		},1000);
 		$('#ContournerEnigme > button').hide();
 		$('.SDCEnigme > ul').sortable( {
 			update: function(event,ui){
@@ -254,27 +275,30 @@ $( function() {
 		});
 	}
 
-
-
-	//La fonction enigmeSortableHard utilise un compteur pour résoudre l'enigme.
-	//Si la solution est trouvée dans le temps imparti, alors le joueur accède au niveau suivante
-	//Sinon il perd la partie
-	function decompteHard(){
-		timer = setInterval(function(){
-			if(time > 0){
-				time--;
-				$('.decompteHardValue').html(time);
+	function findFish(){
+		$('#ContournerEnigmeSuite > button').hide();
+		$('#sendNameFish').click(function(e){
+			var FishProposition = $('#findFishInput').val();
+			nbEssais -= 1;
+			e.preventDefault();
+			//Vérifier si il reste encore des essais au joueur
+			if(nbEssais > 0){
+				//Si mdp = leavemehere
+				if(FishProposition == "qwerty" || FishProposition == "QWERTY"
+				|| FishProposition == "Qwerty"){
+					$('#ContournerEnigmeSuite > form').fadeOut();
+					$('button').fadeIn();
+				}else{
+					alert('il vous reste ' + nbEssais + ' chance(s)');
+				}
 			}
-			else {
-				clearInterval(timer);
+			if(nbEssais <= 0){
 				$('div').not('.filter').hide();
-				$('#GameOver').fadeIn(500);
-				$('#GameOver').children('.stress-death').hide();
-				$('body').css('background','url("img/intro.jpg") center no-repeat / cover');
+				$('#GameOver').fadeIn();
+				$('button').show();
 			}
-		},1000);
+		});
 	}
-
 	//La fonction puzzleDA correspond à l'enigme Puzzle pour lire le message de
 	//la Dark Army. Le but est de recomposer le puzzle pour pouvoir voir le contenu du message
 	function puzzleDA(){
@@ -350,6 +374,7 @@ $( function() {
     $('.imgPuzzlePortableDarlene').jqPuzzle(mySettingsPuzzle2);
 	}
 
+	//Cette fonction change l'image de fond en fonction des choix de l'utilisateur
 	function changeBackground(key){
 
 		if(key == "start"){ $('body').css('background','url("img/eliotcharacter.jpg") center no-repeat') }
@@ -363,9 +388,13 @@ $( function() {
 		if(key == "4x4Surveillance"){ $('body').css('background','url("img/4x4Surveillance.jpg") center no-repeat / cover'); }
 		if(key == "FSociety"){ $('body').css('background','url("img/FsocietyHangar.png") center no-repeat / cover'); }
 		if(key == "PapierAdresse"){ $('body').css('background','url("img/QrMessage.png") center no-repeat / cover'); }
-		if(key == "ConnexionPCFSociety"){ $('body').css('background','url("img/QrMessage.png") center no-repeat / cover');}
-		if(key == "GameOver"){ $('body').css('background','url("img/intro.jpg") center no-repeat / cover');}
-
+		if(key == "ConnexionPCFSociety"){ $('body').css('background','url("img/hackedfsociety.jpg") center no-repeat / cover');}
+		if(key == "AppartDarlene"){ $('body').css('background','url("img/appartementDarlene.jpg") center no-repeat / cover');}
+		if(key == "SaveDarlene"){ $('body').css('background','url("img/walktohangar.jpg") center no-repeat / cover');}
+		if(key == "SuivreEnigme"){ $('body').css('background','url("img/epreuveFinaleEasy.jpg") center no-repeat / cover');}
+		if(key == "ContournerEnigme"){ $('body').css('background','url("img/epreuveFinaleHard.jpg") center no-repeat / cover');}
+		if(key == "FinalSave"){ $('body').css('background','url("img/SaveDarlene.jpg") center no-repeat / cover');}
+		if(key == "GameOver" && $('.normal-death').is(":visible")){ $('body').css('background','url("img/intro.jpg") center no-repeat / cover');}
 	}
 
 });
