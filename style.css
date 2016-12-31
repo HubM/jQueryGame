@@ -75,6 +75,19 @@ button, input[type="submit"]{
 }
 
 
+/* SoundAction */
+#soundAction{
+  position: absolute;
+  width: 30px;
+  left: 50px;
+  top: 50px;
+  transition: all .5s ease;
+  cursor: pointer;
+}
+
+#soundAction:hover{
+  opacity: .5;
+}
 /*******************************************************************************
 ********************************************************************************
 									  						Specific css

@@ -1,4 +1,5 @@
 $( function() {
+	soundAction();
 	/*******************************************************
 							  ***************************
 			  					Les variables globales
@@ -120,6 +121,7 @@ $( function() {
 		});
 	});
 
+
 	/*Afficher la div ayant l'identifiant correspondant à l'attribut go du
 	bouton, et vérifier si cette div a un attribut action. Si oui, alors
 	afficher la fonction associée dans le tableau actionsName*/
@@ -131,6 +133,7 @@ $( function() {
 				}
 			});
 	}
+
 
 	/*Initialiser les valeurs par défault du niveau de stress et de pilules.
 	et les infos en début de jeu pour comprendre les règles*/
@@ -146,6 +149,7 @@ $( function() {
 		$(MorphinePilules).html(MorphinePilulesValue);
 	}
 
+
 	/*Fonction lorsque le jouer a perdu d'une mort liée à de mauvais choix.*/
 	function endGame(){
 		$('div').not('.filter').hide();
@@ -153,6 +157,7 @@ $( function() {
 		$('#GameOver').children('.normal-death').hide();
 		if($('.stress-death').is(":visible")){ $('body').css('background','url("img/elliotMad.png") center no-repeat / cover');}
 	}
+
 
 	//Cette fonction baisse de 10 le niveau de stress et l'affiche,
 	// et diminue de 1 le nombre de pilules
@@ -164,12 +169,14 @@ $( function() {
 		MorphinePilules.html(MorphinePilulesValue);
 	}
 
+
 	//Cette fonction augmente de 10 le niveau de stress et l'affiche
 	function add10S(){
 		$('.ModifyInfos > span:nth-of-type(2)').fadeIn().fadeOut(1000);
 		StressLevelValue += 10;
 		StressLevel.html(StressLevelValue);
 	}
+
 
 	//Cette fonction augmente de 20 le niveau de stress et l'affiche
 	function add20S(){
@@ -178,12 +185,14 @@ $( function() {
 		StressLevel.html(StressLevelValue);
 	}
 
+
 	//Cette fonction augmente de 30 le niveau de stress et l'affiche
 	function add30S(){
 		$('.ModifyInfos > span:last-of-type').fadeIn().fadeOut(1000);
 		StressLevelValue += 30;
 		StressLevel.html(StressLevelValue);
 	}
+
 
 	//Cette fonction va permettre de tester les valeurs rentrées par le joueur,
 	//Elle va également limiter le nombre d'essai à 3. Si dans ces 3 essais le MDP est
@@ -215,6 +224,7 @@ $( function() {
 		});
 	}
 
+
 	//Cette fonction correspond au jeu final qui sauve Darlene. Ici c'est la version facile.
 	//Utilisant le plugin sortable de jquery UI, le but est de remettre de l'ordre dans les
 	//différentes propositions pour débloquer le bouton qui sauve Darlene
@@ -232,6 +242,7 @@ $( function() {
 			}
 		});
 	}
+
 
 	//Cette fonction correspond au jeu final qui sauve Darlene. Ici c'est la version facile.
 	//Utilisant le plugin sortable de jquery UI, le but est de remettre de l'ordre dans les
@@ -274,6 +285,7 @@ $( function() {
 			}
 		});
 	}
+
 
 	function findFish(){
 		$('#ContournerEnigmeSuite > button').hide();
@@ -374,9 +386,9 @@ $( function() {
     $('.imgPuzzlePortableDarlene').jqPuzzle(mySettingsPuzzle2);
 	}
 
+
 	//Cette fonction change l'image de fond en fonction des choix de l'utilisateur
 	function changeBackground(key){
-
 		if(key == "start"){ $('body').css('background','url("img/eliotcharacter.jpg") center no-repeat') }
 		if(key == "ReveilBrutal"){ $('body').css('background','url("img/eliotbed.jpg") center no-repeat / cover'); }
 		if(key == "MDPOubli" && $('.RBTelephone').is(":visible")){ $('body').css('background','url("img/phone.jpg") center no-repeat / cover'); }
@@ -396,5 +408,30 @@ $( function() {
 		if(key == "FinalSave"){ $('body').css('background','url("img/SaveDarlene.jpg") center no-repeat / cover');}
 		if(key == "GameOver" && $('.normal-death').is(":visible")){ $('body').css('background','url("img/intro.jpg") center no-repeat / cover');}
 	}
+
+	function soundAction(){
+
+		var audioElement = document.createElement('audio');
+		audioElement.setAttribute('src', 'song/soundtrack.mp3');
+		audioElement.setAttribute('src', 'song/soundtrack.ogg');
+		audioElement.setAttribute('src', 'song/soundtrack.wav');
+		audioElement.play();
+
+		audioElement.volume = 0;
+
+		$("#soundAction").click(function(){
+			if ($(this).attr('data-click-state') == 1) {
+				$(this).attr('data-click-state', 0)
+				$(this).attr('src','img/sound-mute.svg');
+				audioElement.volume = 0;
+			} else {
+				$(this).attr('data-click-state', 1)
+				$(this).attr('src', 'img/sound-active.svg');
+				audioElement.volume = 0.2;
+			}
+		});
+
+	}
+
 
 });
