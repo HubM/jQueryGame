@@ -205,3 +205,31 @@ button, input[type="submit"]{
   padding-left: 10px;
   margin-bottom: 12px;
 }
+
+
+/*******************************************************************************
+********************************************************************************
+									  						Responsive css
+********************************************************************************
+*******************************************************************************/
+@media screen and (max-width:640px) {
+  .section:not(#intro) {
+    padding-top: 150px;
+  }
+  .section{
+    width: 80% !important;
+    display: block;
+    margin: 0 auto;
+    padding-top: 30px;
+  }
+  h1{
+    font-size: 3rem;
+    line-height: 80px;
+  }
+  button{
+    width: 100%;
+  }
+  #findMDPInput, #findFishInput {
+    font-size: 1.7rem;
+  }
+}
