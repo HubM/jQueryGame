@@ -57,7 +57,6 @@ $( function() {
 		"loose10S" : loose10S,
 		"add10S" : add10S,
 		"add20S" : add20S,
-		"add30S" : add30S,
 	}
 
 
@@ -189,12 +188,6 @@ $( function() {
 	}
 
 
-	//Cette fonction augmente de 30 le niveau de stress et l'affiche
-	function add30S(){
-		$('.ModifyInfos > span:last-of-type').fadeIn().fadeOut(1000);
-		StressLevelValue += 30;
-		StressLevel.html(StressLevelValue);
-	}
 
 
 	//Cette fonction va permettre de tester les valeurs rentrées par le joueur,
@@ -362,6 +355,9 @@ $( function() {
 		setTimeout(function(){
 			$('.skipPuzzleMessageAndLoose').fadeIn();
 		}, 5000);
+		setTimeout(function(){
+			$('.skipPuzzleMessageAndWin').fadeIn();
+		}, 10000);
 		//Les paramètres du puzzleDA
 		var mySettingsPuzzle2 = {
 				rows:4,

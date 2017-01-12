@@ -60,8 +60,8 @@
 					<h2>Pensez à cliquer sur les pilules afin de faire baisser le taux de stress ! Disposant d'un nombre limité, managez votre stess de manière intelligente, bon jeu !</h2>
 					<button>$_JaiCompris</button>
 				</div>
-				<button go="MDPOubli" desc="RBTelephone" impact="add30S">$_PrendreTelephone</button>
-				<button go="ReveilEtrange" desc="RBSommeil" impact="add30S">$_Redormir</button>
+				<button go="MDPOubli" desc="RBTelephone" impact="add20S">$_PrendreTelephone</button>
+				<button go="ReveilEtrange" desc="RBSommeil" impact="add20S">$_Redormir</button>
 			</div>
 
 			<div class="section" id="MDPOubli">
@@ -89,7 +89,7 @@
 					</p>
 					<form>
 						<label for="FindMDP">Mot de passe :</label>
-						<input type="text" name="FindMPD" value="" id="findMDPInput">
+						<input type="text" name="FindMPD" value="" id="findMDPInput" autocomplete="off">
 						<input type="submit" name="" value="$_Envoyer" id="sendMDP">
 					</form>
 					<button go="DarkArmyInfiltration">$_SuivreAdresse</button>
@@ -113,7 +113,7 @@
 					</p>
 				</div>
 					<button go="DarkArmyInfiltration" desc="REConnexionServer" impact="add20S">$_ConnexionServeurFSociety</button>
-					<button go="4x4Surveillance" desc="REQuitterAppartement" impact="add30S">$_QuitterAppartement</button>
+					<button go="4x4Surveillance" desc="REQuitterAppartement" impact="add20S">$_QuitterAppartement</button>
 			</div>
 
 			<div class="section" id="DarkArmyInfiltration">
@@ -151,7 +151,7 @@
 						Il arrête le premier taxi qui passe.
 					</p>
 					<button go="FSociety" impact="add10S">$_HangarFSociety</button>
-					<button go="AppartDarlene" impact="add30S">$_ChezDarlene</button>
+					<button go="AppartDarlene" impact="add20S">$_ChezDarlene</button>
 			</div>
 
 			<div class="section" id="FSociety">
@@ -193,7 +193,8 @@
 
 					<!-- Mettre le puzzle ici -->
 					<img src="img/imgPuzzlePortableDarlene.png" alt="Seconde énigme avec puzzle. Pour lire le message de la Dark Army" class="imgPuzzlePortableDarlene">
-					<button class="skipPuzzleMessage" go="GameOver">Passer</button>
+					<button class="skipPuzzleMessageAndLoose" go="GameOver">Passer</button>
+					<button class="skipPuzzleMessageAndWin" impact="add20S" go="SaveDarlene">Contourner</button>
 					<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
 
 					<button go="SaveDarlene" impact="add20S">$_SuivreAdresse</button>
