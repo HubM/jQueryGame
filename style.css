@@ -181,13 +181,21 @@ button, input[type="submit"]{
 }
 
 
-.skipPuzzleMessage{
+.skipPuzzleMessageAndLoose{
   display: block;
   position: absolute;
   left: 6%;
   top: 50%;
   width: 110px;
 }
+.skipPuzzleMessageAndWin{
+  display: block;
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  width: 110px;
+}
+
 
 /*Style pour les épreuves où l'utilisateur doit replacer dans le bon ordre les fonctions*/
 #SuivreEnigme ul, #ContournerEnigme ul{

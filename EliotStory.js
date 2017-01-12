@@ -138,6 +138,9 @@ $( function() {
 	/*Initialiser les valeurs par défault du niveau de stress et de pilules.
 	et les infos en début de jeu pour comprendre les règles*/
 	function startGame() {
+		// if(MorphinePilules == 0){
+		// 	$('#lostPillule').hide();
+		// }
 		$('#ReveilBrutal').children().not('.infos_begin').hide();
 		$('.infos_begin > button').click(function(e){
 			e.preventDefault();
@@ -316,8 +319,11 @@ $( function() {
 	function puzzleDA(){
 		$('#MessageDA > button, #MessageDA > h2').hide();
 		setTimeout(function(){
-			$('.skipPuzzleMessage').fadeIn();
+			$('.skipPuzzleMessageAndLoose').fadeIn();
 		}, 5000);
+		setTimeout(function(){
+			$('.skipPuzzleMessageAndWin').fadeIn();
+		}, 10000);
 		//Les paramètres du puzzleDA
 		var mySettingsPuzzle1 = {
 				rows:3,
@@ -354,7 +360,7 @@ $( function() {
 	function puzzleAppartDarlene(){
 		$('#RepondreMessagePortableDarlene > button, #RepondreMessagePortableDarlene > h2').hide();
 		setTimeout(function(){
-			$('.skipPuzzleMessage').fadeIn();
+			$('.skipPuzzleMessageAndLoose').fadeIn();
 		}, 5000);
 		//Les paramètres du puzzleDA
 		var mySettingsPuzzle2 = {
@@ -389,7 +395,7 @@ $( function() {
 
 	//Cette fonction change l'image de fond en fonction des choix de l'utilisateur
 	function changeBackground(key){
-		if(key == "start"){ $('body').css('background','url("img/eliotcharacter.jpg") center no-repeat') }
+		if(key == "start"){ $('body').css('background','url("img/eliotcharacter.jpg") center no-repeat /cover') }
 		if(key == "ReveilBrutal"){ $('body').css('background','url("img/eliotbed.jpg") center no-repeat / cover'); }
 		if(key == "MDPOubli" && $('.RBTelephone').is(":visible")){ $('body').css('background','url("img/phone.jpg") center no-repeat / cover'); }
 		if(key == "MDPOubli" && $('.RBMorphine').is(":visible")){ $('body').css('background','url("img/drug.jpg") center no-repeat / cover'); }

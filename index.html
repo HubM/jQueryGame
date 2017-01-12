@@ -62,7 +62,6 @@
 				</div>
 				<button go="MDPOubli" desc="RBTelephone" impact="add30S">$_PrendreTelephone</button>
 				<button go="ReveilEtrange" desc="RBSommeil" impact="add30S">$_Redormir</button>
-				<button go="MDPOubli" desc="RBMorphine" impact="loose10S">$_PrendreMorphine</button>
 			</div>
 
 			<div class="section" id="MDPOubli">
@@ -80,7 +79,6 @@
 					</p>
 				</div>
 				<button go="ChercherMDP" desc="MDPOConnexionServer" impact="add20S">$_ChercherMotDePasse</button>
-				<button go="ReveilEtrange" desc="MDPOMorphine" impact="loose10S">$_PrendreMorphine</button>
 			</div>
 
 			<div class="section" id="ChercherMDP" action="findMDP">
@@ -137,11 +135,13 @@
 
 					<!-- Mettre le puzzle ici -->
 					<img src="img/imgPuzzleMessageDA.jpg" class="imgPuzzleMessageDA" alt="Première énigme avec un puzzle. Pour lire le message de la Dark Army">
-					<button class="skipPuzzleMessage" go="GameOver">Passer</button>
+					<button class="skipPuzzleMessageAndLoose" go="GameOver">Passer</button>
+					<button class="skipPuzzleMessageAndWin" impact="add20S" go="SaveDarlene">Contourner</button>
+
 					<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
 
 
-					<button go="SaveDarlene" impact="add20S">$_SuivreAdresse</button>
+					<button go="SaveDarlene">$_SuivreAdresse</button>
 					<button go="4x4Surveillance" impact="add20S">$_QuitterAppartement</button>
 			</div>
 
