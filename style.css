@@ -99,6 +99,21 @@ button, input[type="submit"]{
 	text-align: center;
 }
 
+/*Liste de MDP - HELP*/
+.helpMDP{
+  color: #CC0008;
+  cursor: pointer;
+}
+.listMDP{
+  display: none;
+}
+.listMDP > p{
+  width: auto;
+  display: inline-block;
+}
+.NoHelp{
+  display: none;
+}
 /*Niveau de santé d'Elliot*/
 #EliotInfos{
   width: auto;
@@ -111,6 +126,7 @@ button, input[type="submit"]{
 
 #EliotInfos > div{
   width: 100%;
+  cursor: pointer;
 }
 
 .life > span{

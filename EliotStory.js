@@ -1,5 +1,6 @@
 $( function() {
 	soundAction();
+	helpMDP();
 	/*******************************************************
 							  ***************************
 			  					Les variables globales
@@ -16,7 +17,7 @@ $( function() {
 	var MorphinePilulesValue = 3;
 	var StressLevel = $('.StressLevel > span');
 	var StressLevelValue = 0;
-	var nbEssais = 3;
+	var nbEssais;
 
 
 
@@ -187,13 +188,30 @@ $( function() {
 		StressLevel.html(StressLevelValue);
 	}
 
+	function helpMDP(e){
+		$('.helpMDP').click(function(e){
+			$('.listMDP').fadeOut();
+			if(MorphinePilulesValue > 1){
+				MorphinePilulesValue -= 1;
+				MorphinePilules.html(MorphinePilulesValue);
+				$('.listMDP').fadeIn(500);
+				setTimeout(function(){
+					$('.listMDP').fadeOut(500)
+				},7000);
+			} else {
+				$('.NoHelp').fadeIn(500);
+			}
+
+		});
+	}
 
 
 
 	//Cette fonction va permettre de tester les valeurs rentrées par le joueur,
 	//Elle va également limiter le nombre d'essai à 3. Si dans ces 3 essais le MDP est
 	//trouvé, alors les boutons d'actions s'affichent, sinon le joueur perd
-	function findMDP(){
+	function findMDP(e){
+		nbEssais = 3;
 		$('#ChercherMDP > button').hide();
 		$('#sendMDP').click(function(e){
 			var MDPProposition = $('#findMDPInput').val();
@@ -204,7 +222,8 @@ $( function() {
 				//Si mdp = leavemehere
 				if(MDPProposition == "leavemehere" || MDPProposition == "LeaveMeHere"
 				|| MDPProposition == "leave_me_here" || MDPProposition == "leave-me-here"
-				|| MDPProposition == "leave me here" || MDPProposition == "LEAVEMEHERE"){
+				|| MDPProposition == "leave me here" || MDPProposition == "LEAVEMEHERE"
+				|| MDPProposition == "leavemeHere" || MDPProposition == "Leavemehere"){
 					MorphinePilulesValue += 2;
 					MorphinePilules.html(MorphinePilulesValue);
 					$('#ChercherMDP > form').fadeOut();
@@ -257,8 +276,7 @@ $( function() {
 				$('.decompteHardValue').html(time);
 			}
 			else {
-				clearInterval(timer);
-				time = undefined;
+				window.clearInterval(timer);
 				$('div').not('.filter').hide();
 				$('#GameOver').fadeIn(500);
 				$('#GameOver').children('.stress-death').hide();
@@ -271,8 +289,7 @@ $( function() {
 				var Order = $(this).sortable('toArray').toString();
 				if(Order == "1,2,3,4,5"){
 					$('.SDCEnigme > p').hide();
-					time = 1;
-					clearInterval(timer);
+					window.clearInterval(timer);
 					$(this).fadeOut();
 					MorphinePilulesValue += 1;
 					MorphinePilules.html(MorphinePilulesValue);
@@ -285,26 +302,16 @@ $( function() {
 
 	function findFish(){
 		$('#ContournerEnigmeSuite > button').hide();
+		$('#GameOver').hide();
 		$('#sendNameFish').click(function(e){
 			var FishProposition = $('#findFishInput').val();
-			nbEssais -= 1;
-			e.preventDefault();
 			//Vérifier si il reste encore des essais au joueur
-			if(nbEssais > 0){
-				//Si mdp = leavemehere
+				//Si mdp = qwerty
 				if(FishProposition == "qwerty" || FishProposition == "QWERTY"
-				|| FishProposition == "Qwerty"){
+				|| FishProposition == "Qwerty" || FishProposition == "QwErTy"){
 					$('#ContournerEnigmeSuite > form').fadeOut();
 					$('button').fadeIn();
-				}else{
-					alert('il vous reste ' + nbEssais + ' chance(s)');
 				}
-			}
-			if(nbEssais <= 0){
-				$('div').not('.filter').hide();
-				$('#GameOver').fadeIn();
-				$('button').show();
-			}
 		});
 	}
 	//La fonction puzzleDA correspond à l'enigme Puzzle pour lire le message de
@@ -411,6 +418,7 @@ $( function() {
 		if(key == "GameOver" && $('.normal-death').is(":visible")){ $('body').css('background','url("img/intro.jpg") center no-repeat / cover');}
 	}
 
+	// Cette fonction active le son et le charge, ou l'enlève.
 	function soundAction(){
 
 		var audioElement = document.createElement('audio');

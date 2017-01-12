@@ -60,7 +60,7 @@
 					<h2>Pensez à cliquer sur les pilules afin de faire baisser le taux de stress ! Disposant d'un nombre limité, managez votre stess de manière intelligente, bon jeu !</h2>
 					<button>$_JaiCompris</button>
 				</div>
-				<button go="MDPOubli" desc="RBTelephone" impact="add20S">$_PrendreTelephone</button>
+				<button go="MDPOubli" desc="RBTelephone" impact="add10S">$_PrendreTelephone</button>
 				<button go="ReveilEtrange" desc="RBSommeil" impact="add20S">$_Redormir</button>
 			</div>
 
@@ -87,8 +87,21 @@
 						Pourquoi ne pas l'aider ?
 						<span>Indice : Le mot de passe est une référence lié à <a href="http://www.films-regarder.org/load/origin2_mr_robot/mr_robot_saison_1_episode_1/321-1-0-4894" target="_blank">l'épisode 1</a></span>
 					</p>
+					<p>Une aide est disponible <span class="helpMDP">ici</span>, mais elle vous coûtera une pilule</p>
+					<div class="listMDP">
+						<h3>Le mot de passe est l'une de ces propositions :</h3>
+						<p>qwerty</p>
+						<p>azerty</p>
+						<p>leavemehere</p>
+						<p>fsociety</p>
+						<p>allsafe</p>
+						<p>mrrobot</p>
+						<p>darlene</p>
+						<p>romero</p>
+					</div>
+					<h3 class="NoHelp">Vous n'avez plus assez de pilules pour obtenir de l'aide</h3>
 					<form>
-						<label for="FindMDP">Mot de passe :</label>
+						<label for="FindMDP"></label>
 						<input type="text" name="FindMPD" value="" id="findMDPInput" autocomplete="off">
 						<input type="submit" name="" value="$_Envoyer" id="sendMDP">
 					</form>
@@ -130,7 +143,7 @@
 
 			<div class="section" id="MessageDA" action="puzzleDA">
 					<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu.
-					Recomposez l'image pour accèder au contenu.
+					Recomposez l'image pour accèder au contenu. Clicker sur les carrés pour les faire bouger.
 				</p>
 
 					<!-- Mettre le puzzle ici -->
@@ -188,7 +201,7 @@
 
 			<div class="section" id="RepondreMessagePortableDarlene" action="puzzleAppartDarlene">
 					<p>Le message nécessite de devoir résoudre une énigme pour pouvoir être lu.
-					Recomposez l'image pour accèder au contenu.
+					Recomposez l'image pour accèder au contenu. Clicker sur les carrés pour les faire bouger.
 					</p>
 
 					<!-- Mettre le puzzle ici -->
@@ -226,7 +239,7 @@
 						<li id="7">saveDarlene();</li>
 						<li id="3">	for(var i = 0; i < 8; i++){</li>
 						<li id="5"> }</li>
-						<li id="2">	message = ['J','O','I','N','_','U','S'];</li>
+						<li id="2">var message = ['J','O','I','N','_','U','S'];</li>
 						<li id="6">}</li>
 					</ul>
 				</div>
