@@ -113,6 +113,7 @@ button, input[type="submit"]{
 }
 .NoHelp{
   display: none;
+  color:#CC0008; 
 }
 /*Niveau de santé d'Elliot*/
 #EliotInfos{

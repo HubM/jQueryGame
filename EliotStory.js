@@ -292,7 +292,7 @@ $( function() {
 					window.clearInterval(timer);
 					$(this).fadeOut();
 					MorphinePilulesValue += 1;
-					MorphinePilules.html(MorphinePilulesValue);
+					$(MorphinePilules).html(MorphinePilulesValue);
 					$('button').show();
 				}
 			}
