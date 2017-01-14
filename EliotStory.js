@@ -167,9 +167,9 @@ $( function() {
 	function loose10S(){
 		$('.ModifyInfos > span:first-of-type').fadeIn().fadeOut(1000);
 		StressLevelValue -= 10;
-		StressLevel.html(StressLevelValue);
+		$(StressLevel).html(StressLevelValue);
 		MorphinePilulesValue -= 1;
-		MorphinePilules.html(MorphinePilulesValue);
+		$(MorphinePilules).html(MorphinePilulesValue);
 	}
 
 
@@ -177,7 +177,7 @@ $( function() {
 	function add10S(){
 		$('.ModifyInfos > span:nth-of-type(2)').fadeIn().fadeOut(1000);
 		StressLevelValue += 10;
-		StressLevel.html(StressLevelValue);
+		$(StressLevel).html(StressLevelValue);
 	}
 
 
@@ -185,7 +185,7 @@ $( function() {
 	function add20S(){
 		$('.ModifyInfos > span:nth-of-type(3)').fadeIn().fadeOut(1000);
 		StressLevelValue += 20;
-		StressLevel.html(StressLevelValue);
+		$(StressLevel).html(StressLevelValue);
 	}
 
 	function helpMDP(e){
@@ -193,7 +193,7 @@ $( function() {
 			$('.listMDP').fadeOut();
 			if(MorphinePilulesValue > 1){
 				MorphinePilulesValue -= 1;
-				MorphinePilules.html(MorphinePilulesValue);
+				$(MorphinePilules).html(MorphinePilulesValue);
 				$('.listMDP').fadeIn(500);
 				setTimeout(function(){
 					$('.listMDP').fadeOut(500)
@@ -225,7 +225,7 @@ $( function() {
 				|| MDPProposition == "leave me here" || MDPProposition == "LEAVEMEHERE"
 				|| MDPProposition == "leavemeHere" || MDPProposition == "Leavemehere"){
 					MorphinePilulesValue += 2;
-					MorphinePilules.html(MorphinePilulesValue);
+					$(MorphinePilules).html(MorphinePilulesValue);
 					$('#ChercherMDP > form').fadeOut();
 					$('button').fadeIn();
 				}else{
@@ -250,7 +250,7 @@ $( function() {
 				var Order = $(this).sortable('toArray').toString();
 				if(Order == "1,2,3,4,5,6,7"){
 					MorphinePilulesValue += 1;
-					MorphinePilules.html(MorphinePilulesValue);
+					$(MorphinePilules).html(MorphinePilulesValue);
 					$('button').show();
 					$(this).fadeOut();
 				}
