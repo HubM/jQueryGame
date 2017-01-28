@@ -178,6 +178,7 @@ button, input[type="submit"]{
   font-size: 4rem;
   outline: 0;
   font-family: 'envy_code_rregular';
+  width:100%;
 }
 
 /*Cacher le logo de la librairie jqpuzzle + styles pour puzzle*/
