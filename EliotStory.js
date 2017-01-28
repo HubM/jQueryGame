@@ -1,6 +1,7 @@
 $( function() {
 	soundAction();
 	helpMDP();
+	helpFish();
 	/*******************************************************
 							  ***************************
 			  					Les variables globales
@@ -18,8 +19,8 @@ $( function() {
 	var StressLevel = $('.StressLevel > span');
 	var StressLevelValue = 0;
 	var nbEssais;
-
-
+	var timer;
+	var time = 15;
 
 	/*******************************************************
 							  ***************************
@@ -51,6 +52,7 @@ $( function() {
 		"puzzleDA": puzzleDA,
 		"puzzleAppartDarlene" :puzzleAppartDarlene,
 		"findFish": findFish,
+		"GameOver":endGame,
 	}
 
 	//Tableau
@@ -91,6 +93,12 @@ $( function() {
 				window.location.href = window.location.href;
 			}
 
+			if(nextSection == "FinalSave"){
+				$('div').not('#FinalSave,.filter').hide();
+				clearInterval(timer);
+			}
+
+
 			//Si le bouton a un attr impact, alors on
 			//affecte associe sa valeur à une fonction associée dans le tableau
 			//impactsName
@@ -108,13 +116,7 @@ $( function() {
 
 			//Delimitation du niveau de stress maximal pour mener à bien le jeu
 			if(StressLevelValue > 90){
-				$('.filter').css('opacity','1');
 				endGame();
-			}
-
-			//Delimitation du niveau de stress maximal pour mener à bien le jeu
-			if(nextSection == "GameOver"){
-				$('.stress-death').hide();
 			}
 
 
@@ -155,10 +157,10 @@ $( function() {
 
 	/*Fonction lorsque le jouer a perdu d'une mort liée à de mauvais choix.*/
 	function endGame(){
-		$('div').not('.filter').hide();
-		$('#GameOver').fadeIn(500);
-		$('#GameOver').children('.normal-death').hide();
-		if($('.stress-death').is(":visible")){ $('body').css('background','url("img/elliotMad.png") center no-repeat / cover');}
+			$('div').not('.filter').hide();
+			$('button').show();
+			$('#GameOver').fadeIn(500);
+			$('body').css('background','url("img/elliotMad.png") center no-repeat / cover');
 	}
 
 
@@ -188,15 +190,38 @@ $( function() {
 		$(StressLevel).html(StressLevelValue);
 	}
 
+	//Cette fonction se lance lorsque le joueur décide d'utiliser l'aide pour trouver
+	// le mot de passe, elle affiche une liste de propositions pendant 7s, le MDP est
+	// l'une d'entre elles. Si le joueur n'a plus de pilules, il lui est impossible
+	// d'utiliser l'aide car elle coûte à chaque fois 1 pillule
 	function helpMDP(e){
 		$('.helpMDP').click(function(e){
 			$('.listMDP').fadeOut();
-			if(MorphinePilulesValue > 1){
+			if(MorphinePilulesValue >= 1){
 				MorphinePilulesValue -= 1;
 				$(MorphinePilules).html(MorphinePilulesValue);
 				$('.listMDP').fadeIn(500);
 				setTimeout(function(){
 					$('.listMDP').fadeOut(500)
+				},7000);
+			} else {
+				$('.NoHelp').fadeIn(500);
+			}
+
+		});
+	}
+
+	// Fonction similaire à l'aide pour la recherche du mot de passe. Il s'agit ici
+	// de l'aide pour trouver le nom du poisson
+	function helpFish(e){
+		$('.helpFish').click(function(e){
+			$('.listFish').fadeOut();
+			if(MorphinePilulesValue >= 1){
+				MorphinePilulesValue -= 1;
+				$(MorphinePilules).html(MorphinePilulesValue);
+				$('.listFish').fadeIn(500);
+				setTimeout(function(){
+					$('.listFish').fadeOut(500)
 				},7000);
 			} else {
 				$('.NoHelp').fadeIn(500);
@@ -232,8 +257,8 @@ $( function() {
 					alert('il vous reste ' + nbEssais + ' chance(s)');
 				}
 		 	}else{
-		 		$('div').not('.filter').hide();
-				$('#GameOver').fadeIn();
+				endGame();
+				// $('#GameOver').fadeIn();
 				$('button').show();
 			}
 		});
@@ -267,53 +292,61 @@ $( function() {
 		//La fonction enigmeSortableHard utilise un compteur pour résoudre l'enigme.
 		//Si la solution est trouvée dans le temps imparti, alors le joueur accède au niveau suivante
 		//Sinon il perd la partie
-	  var time = 15;
-		var timer;
-
+		$('#ContournerEnigme > button').hide();
 		timer = setInterval(function(){
+			time--;
 			if(time > 0){
-				time--;
 				$('.decompteHardValue').html(time);
-			}
-			else {
-				window.clearInterval(timer);
-				$('div').not('.filter').hide();
-				$('#GameOver').fadeIn(500);
-				$('#GameOver').children('.stress-death').hide();
-				$('body').css('background','url("img/intro.jpg") center no-repeat / cover');
+				$('.SDCEnigme > ul').sortable( {
+					update: function(event,ui){
+						var Order = $(this).sortable('toArray').toString();
+						if(Order == "1,2,3,4,5"){
+							$('.SDCEnigme > p').hide();
+							clearInterval(timer);
+							time++;
+							$(this).fadeOut();
+							MorphinePilulesValue += 1;
+							$(MorphinePilules).html(MorphinePilulesValue);
+							$('button').show();
+						}
+					}
+				});
+			} else {
+				clearInterval(timer);
+				endGame();
 			}
 		},1000);
-		$('#ContournerEnigme > button').hide();
-		$('.SDCEnigme > ul').sortable( {
-			update: function(event,ui){
-				var Order = $(this).sortable('toArray').toString();
-				if(Order == "1,2,3,4,5"){
-					$('.SDCEnigme > p').hide();
-					window.clearInterval(timer);
-					$(this).fadeOut();
-					MorphinePilulesValue += 1;
-					$(MorphinePilules).html(MorphinePilulesValue);
-					$('button').show();
-				}
-			}
-		});
+
 	}
 
-
+	//Cette fonction va permettre de tester les valeurs rentrées par le joueur,
+	//Elle va également limiter le nombre d'essai à 3. Si dans ces 3 essais le nom du
+	//poisson est trouvé, alors les boutons d'actions s'affichent, sinon le joueur perd
 	function findFish(){
+		time = 1000;
+		nbEssais = 3;
 		$('#ContournerEnigmeSuite > button').hide();
-		$('#GameOver').hide();
 		$('#sendNameFish').click(function(e){
 			var FishProposition = $('#findFishInput').val();
+			nbEssais -= 1;
+			e.preventDefault();
 			//Vérifier si il reste encore des essais au joueur
 				//Si mdp = qwerty
-				if(FishProposition == "qwerty" || FishProposition == "QWERTY"
-				|| FishProposition == "Qwerty" || FishProposition == "QwErTy"){
-					$('#ContournerEnigmeSuite > form').fadeOut();
-					$('button').fadeIn();
+				if(nbEssais > 0){
+					if(FishProposition == "qwerty" || FishProposition == "QWERTY"
+					|| FishProposition == "Qwerty" || FishProposition == "QwErTy"){
+						$('#ContournerEnigmeSuite > form').fadeOut();
+						$('button').fadeIn();
+					} else {
+						alert('il vous reste ' + nbEssais + ' chance(s)');
+					}
+				} else{
+					endGame();
 				}
 		});
 	}
+
+
 	//La fonction puzzleDA correspond à l'enigme Puzzle pour lire le message de
 	//la Dark Army. Le but est de recomposer le puzzle pour pouvoir voir le contenu du message
 	function puzzleDA(){
@@ -415,7 +448,7 @@ $( function() {
 		if(key == "SuivreEnigme"){ $('body').css('background','url("img/epreuveFinaleEasy.jpg") center no-repeat / cover');}
 		if(key == "ContournerEnigme"){ $('body').css('background','url("img/epreuveFinaleHard.jpg") center no-repeat / cover');}
 		if(key == "FinalSave"){ $('body').css('background','url("img/SaveDarlene.jpg") center no-repeat / cover');}
-		if(key == "GameOver" && $('.normal-death').is(":visible")){ $('body').css('background','url("img/intro.jpg") center no-repeat / cover');}
+		if(key == "GameOver" ){ $('body').css('background','url("img/elliotMad.png") center no-repeat / cover');}
 	}
 
 	// Cette fonction active le son et le charge, ou l'enlève.
@@ -442,6 +475,5 @@ $( function() {
 		});
 
 	}
-
 
 });

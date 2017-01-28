@@ -100,20 +100,20 @@ button, input[type="submit"]{
 }
 
 /*Liste de MDP - HELP*/
-.helpMDP{
+.helpMDP, .helpFish{
   color: #CC0008;
   cursor: pointer;
 }
-.listMDP{
+.listMDP, .listFish{
   display: none;
 }
-.listMDP > p{
+.listMDP > p, .listFish > p{
   width: auto;
   display: inline-block;
 }
 .NoHelp{
   display: none;
-  color:#CC0008; 
+  color:#CC0008;
 }
 /*Niveau de santé d'Elliot*/
 #EliotInfos{
@@ -208,7 +208,7 @@ button, input[type="submit"]{
 .skipPuzzleMessageAndWin{
   display: block;
   position: absolute;
-  right: 6%;
+  right: 2%;
   top: 50%;
   width: 110px;
 }
@@ -229,6 +229,7 @@ button, input[type="submit"]{
   border: 1px solid green;
   padding-left: 10px;
   margin-bottom: 12px;
+  cursor: pointer;
 }
 
 

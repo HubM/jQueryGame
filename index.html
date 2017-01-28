@@ -207,7 +207,7 @@
 					</p>
 
 					<!-- Mettre le puzzle ici -->
-					<img src="img/imgPuzzlePortableDarlene.png" alt="Seconde énigme avec puzzle. Pour lire le message de la Dark Army" class="imgPuzzlePortableDarlene">
+					<img src="img/imgpuzzleportabledarlene.png" alt="Seconde énigme avec puzzle. Pour lire le message de la Dark Army" class="imgPuzzlePortableDarlene">
 					<button class="skipPuzzleMessageAndLoose" go="GameOver">Passer</button>
 					<button class="skipPuzzleMessageAndWin" impact="add20S" go="SaveDarlene">Contourner</button>
 					<h2>92 E. 82nd St., New York, NYC, 10028.</h2>
@@ -270,8 +270,21 @@
 
 			<div class="section" id="ContournerEnigmeSuite" action="findFish">
 				<h2>Comment s'appelle le poisson d'Elliot ?</h2>
+				<p>Une aide est disponible <span class="helpFish">ici</span>, mais elle vous coûtera une pilule</p>
+				<div class="listFish">
+					<h3>Le mot de passe est l'une de ces propositions :</h3>
+					<p>qwerty</p>
+					<p>angela</p>
+					<p>azerty</p>
+					<p>fernando</p>
+					<p>shayla</p>
+					<p>mrrobot</p>
+					<p>darlene</p>
+					<p>romero</p>
+				</div>
+				<h3 class="NoHelp">Vous n'avez plus assez de pilules pour obtenir de l'aide</h3>
 				<form>
-					<input type="text" name="FindFish" value="" id="findFishInput">
+					<input type="text" name="FindFish" value="" id="findFishInput" autocomplete="off">
 					<input type="submit" name="" value="$_Envoyer" id="sendNameFish">
 				</form>
 				<button go="FinalSave">$_SauverDarlene</button>
@@ -300,11 +313,8 @@
 			</div>
 
 			<div class="section" id="GameOver">
-				<p class="normal-death">Vous vous êtes fait piéger ! Vos choix n'étaient pas les bons, et Darlene n'a pas survécue.
-				Le choc était trop lourd pour Elliot, qui a basculé dans une folie totale...
-				</p>
-				<p class="stress-death">Le niveau de stress d'Elliot est trop haut. Sa vision se trouble, il s'écroule au sol.
-					Mr.Robot apparaît dans son champ de vision. Il est déjà trop tard...
+				<p>Vous avez perdu la partie ! Soit vos choix n'étaient pas les bons, soit votre niveau de stress était trop élevé.
+				Malheureusement, Darlene n'a pas survécue...Le choc était trop lourd pour Elliot, qui a basculé dans une folie totale.
 				</p>
 				<p>Merci pour votre participation, envie de redonner une chance à Elliot ?</p>
 				<button go="intro">$_RecommencerJeu</button>
